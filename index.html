@@ -6,50 +6,59 @@
 <title>허현정 · CX Manager</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
+/* ─── TOKENS ─── */
 :root{
   --blue:#3182F6;--blue-bg:#EBF3FF;--blue-bd:#C5DCFC;
-  --i1:#191F28;--i2:#333D4B;--i3:#4E5968;--i4:#8B95A1;--i5:#B0B8C1;
-  --bg:#F2F4F6;--bd:#E5E8EB;--r:20px;
+  --t1:#111111;   /* 제목 */
+  --t2:#333333;   /* 본문 */
+  --t3:#555555;   /* 보조 본문 */
+  --t4:#888888;   /* 날짜·부가 */
+  --t5:#AAAAAA;   /* 비활성 */
+  --bg:#F5F6F8;--bd:#E5E8EB;--r:20px;
+  --gap-section:56px;   /* 섹션 간 간격 */
+  --gap-block:32px;     /* 블록 간 간격 */
+  --content-w:680px;    /* 줄 길이 제한 */
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 
+/* BG */
 .fluid-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.18;animation:blobDrift var(--d,20s) ease-in-out infinite alternate}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.15;animation:blobDrift var(--d,20s) ease-in-out infinite alternate}
 .blob-1{width:700px;height:700px;background:radial-gradient(circle,#3182F6,#C5DCFC);top:-260px;left:-220px;--d:20s}
 .blob-2{width:560px;height:560px;background:radial-gradient(circle,#00C073,#B0F0D8);top:35%;right:-200px;--d:26s;animation-delay:-8s}
 .blob-3{width:480px;height:480px;background:radial-gradient(circle,#C5DCFC,#EBF3FE);bottom:5%;left:15%;--d:18s;animation-delay:-13s}
 @keyframes blobDrift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-20px) scale(1.05)}100%{transform:translate(60px,20px) scale(1.1)}}
-body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5f1ff,#fff,#dcedfc,#fff,#f0f7ff);background-size:400% 400%;animation:bgP 18s ease-in-out infinite;background-attachment:fixed;color:var(--i1);-webkit-font-smoothing:antialiased;line-height:1}
+body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8f0ff,#fff,#ddeafc,#fff,#eef5ff);background-size:400% 400%;animation:bgP 20s ease-in-out infinite;background-attachment:fixed;color:var(--t1);-webkit-font-smoothing:antialiased;line-height:1}
 @keyframes bgP{0%{background-position:0% 0%}50%{background-position:100% 100%}100%{background-position:0% 0%}}
 #pb{position:fixed;top:0;left:0;height:2px;background:var(--blue);width:0;z-index:200;transition:width .1s}
 
 /* NAV */
 .nav{position:fixed;inset:0 0 auto;z-index:99;height:56px;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:center}
 .nav-inner{width:100%;max-width:800px;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
-.nav-name{font-size:15px;font-weight:700;color:var(--i1)}
+.nav-name{font-size:15px;font-weight:700;color:var(--t1)}
 .nav-links{display:flex;gap:4px;list-style:none}
-.nav-links a{font-size:13px;font-weight:500;color:var(--i4);text-decoration:none;padding:6px 10px;border-radius:8px;transition:all .15s}
-.nav-links a:hover,.nav-links a.active{background:var(--bg);color:var(--i1)}
+.nav-links a{font-size:13px;font-weight:500;color:var(--t4);text-decoration:none;padding:6px 10px;border-radius:8px;transition:all .15s}
+.nav-links a:hover,.nav-links a.active{background:var(--bg);color:var(--t1)}
 .nav-links a.active{font-weight:700;color:var(--blue);background:var(--blue-bg)}
 .nav-pill{font-size:11px;font-weight:600;color:var(--blue);background:var(--blue-bg);padding:4px 10px;border-radius:20px}
 
 /* HERO */
-#hero{position:relative;width:100%;height:100vh;overflow:hidden;color:var(--i1)}
-.grain{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+#hero{position:relative;width:100%;height:100vh;overflow:hidden;color:var(--t1)}
+.grain{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .hero-inner{position:absolute;inset:0;padding:40px;z-index:2}
-.hero-tl{position:absolute;top:40px;left:40px;font-weight:800;font-size:20px;letter-spacing:-.5px}
-.hero-role{font-weight:400;font-size:14px;opacity:.7}
+.hero-tl{position:absolute;top:40px;left:40px;font-weight:800;font-size:20px;letter-spacing:-.5px;color:var(--t1)}
+.hero-role{font-weight:400;font-size:14px;color:var(--t4)}
 .hero-tr{position:absolute;top:40px;right:40px;text-align:right;list-style:none}
 .hero-tr li{margin-bottom:8px}
-.hero-tr a{color:var(--i1);text-decoration:none;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;opacity:.45;transition:opacity .2s}
+.hero-tr a{color:var(--t1);text-decoration:none;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;opacity:.35;transition:opacity .2s}
 .hero-tr a:hover{opacity:1;color:var(--blue)}
 .hero-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;width:100%}
-.hero-h1{font-size:4.6vw;font-weight:900;line-height:1.15;letter-spacing:-2px;color:var(--i1);white-space:nowrap}
+.hero-h1{font-size:4.6vw;font-weight:900;line-height:1.15;letter-spacing:-2px;color:var(--t1);white-space:nowrap}
 .hero-bottom{position:absolute;bottom:40px;left:40px}
-.hero-desc{font-size:14px;font-weight:400;line-height:1.7;opacity:.75;max-width:480px}
-.hero-contact{margin-top:12px;font-size:13px;font-weight:600;opacity:.55}
-.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);font-size:20px;animation:bounce 2s infinite;opacity:.4}
+.hero-desc{font-size:14px;font-weight:400;line-height:1.75;color:var(--t3);max-width:480px}
+.hero-contact{margin-top:12px;font-size:13px;font-weight:600;color:var(--t4)}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);font-size:20px;animation:bounce 2s infinite;opacity:.3}
 @keyframes bounce{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-8px)}}
 @media(max-width:768px){.hero-h1{font-size:26px;white-space:normal;padding:0 20px}}
 
@@ -62,7 +71,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
 .sh{display:flex;align-items:flex-end;justify-content:space-between;padding:144px 0 20px}
 .sh.first{padding-top:56px}
 .sh-num{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px}
-.sh-title{font-size:22px;font-weight:900;letter-spacing:-1px;color:var(--i1)}
+.sh-title{font-size:22px;font-weight:900;letter-spacing:-1px;color:var(--t1)}
 
 /* PROJECT CARD (목록) */
 .proj{background:#fff;border-radius:var(--r);margin-top:16px;cursor:pointer;border:1px solid var(--bd);transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s,border-color .2s;box-shadow:0 1px 8px rgba(0,0,0,.04)}
@@ -70,14 +79,14 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
 .proj-details{display:none !important}
 .proj-body{padding:24px 24px 0}
 .proj-meta{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.proj-num{font-size:11px;font-weight:700;color:var(--i5)}
+.proj-num{font-size:11px;font-weight:700;color:var(--t5)}
 .proj-tag{font-size:11px;font-weight:700;color:var(--blue);background:var(--blue-bg);padding:3px 10px;border-radius:6px}
-.proj-title{font-size:20px;font-weight:900;letter-spacing:-.7px;color:var(--i1);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.proj-desc{font-size:13px;color:var(--i3);line-height:1.75;word-break:keep-all}
-.proj-desc b{color:var(--i1);font-weight:700}
+.proj-title{font-size:20px;font-weight:900;letter-spacing:-.7px;color:var(--t1);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.proj-desc{font-size:13px;color:var(--t3);line-height:1.75;word-break:keep-all}
+.proj-desc b{color:var(--t1);font-weight:700}
 .proj-foot{display:flex;align-items:center;justify-content:space-between;padding:12px 24px 16px}
-.proj-stat{font-size:11px;color:var(--i5);font-weight:400}
-.proj-arr{width:26px;height:26px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--i4);transition:background .2s,color .2s,transform .2s}
+.proj-stat{font-size:11px;color:var(--t5);font-weight:400}
+.proj-arr{width:26px;height:26px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--t4);transition:background .2s,color .2s,transform .2s}
 .proj:hover .proj-arr{background:var(--blue);color:#fff;transform:translateX(2px)}
 
 /* ── 역량 카드 ── */
@@ -85,14 +94,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
 .comp-track{display:flex;gap:12px;padding:4px 24px 8px;width:max-content;animation:cScroll 32s linear infinite}
 .comp-track:hover{animation-play-state:paused}
 @keyframes cScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.cc{
-  flex:0 0 190px;width:190px;height:260px;
-  border-radius:16px;padding:18px 16px 16px;
-  display:grid;grid-template-rows:auto 1fr auto;gap:8px;
-  position:relative;overflow:hidden;
-  border:1px solid rgba(255,255,255,.1);
-  transition:transform .25s cubic-bezier(.16,1,.3,1);
-}
+.cc{flex:0 0 190px;width:190px;height:260px;border-radius:16px;padding:18px 16px 16px;display:flex;flex-direction:column;gap:0;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)}
 .cc:nth-child(1),.cc:nth-child(6){background:#0D1B2A}
 .cc:nth-child(2),.cc:nth-child(7){background:#0A1714}
 .cc:nth-child(3),.cc:nth-child(8){background:#0E1526}
@@ -100,111 +102,137 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
 .cc:nth-child(5),.cc:nth-child(10){background:#0B1826}
 .cc::after{content:'';position:absolute;top:0;left:0;right:0;height:55%;background:linear-gradient(180deg,rgba(255,255,255,.05) 0%,transparent 100%);pointer-events:none;border-radius:16px 16px 0 0}
 .cc:hover{transform:translateY(-4px)}
-/* 6. 역량 카드 폰트 — Noto Sans KR, 행간 타이트 */
-.cc-en{
-  font-family:'Noto Sans KR',sans-serif;
-  font-size:11px;font-weight:900;letter-spacing:.7px;
-  text-transform:uppercase;color:rgba(255,255,255,.75);
-  line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  position:relative;z-index:1;
-}
-.cc-art{
-  display:flex;align-items:center;justify-content:center;
-  position:relative;z-index:1;overflow:visible;
-}
+.cc-en{font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:900;letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.92);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:relative;z-index:1;flex-shrink:0;margin-bottom:12px}
+.cc-art{display:flex;align-items:center;justify-content:center;position:relative;z-index:1;overflow:visible;flex:1;padding:4px 0}
 .cc-art svg{width:auto;height:auto;max-width:130px;max-height:100px;display:block}
-.cc-desc{
-  font-family:'Noto Sans KR',sans-serif;
-  font-size:11.5px;font-weight:400;
-  color:rgba(255,255,255,.82);
-  line-height:1.45;  /* 6. 행간 줄임 */
-  word-break:keep-all;
-  position:relative;z-index:1;
-}
+.cc-desc{font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,.8);line-height:1.58;word-break:keep-all;position:relative;z-index:1;flex-shrink:0;margin-top:10px;letter-spacing:.2px;text-shadow:0 1px 3px rgba(0,0,0,.4)}
 
 /* CLOSING */
 .closing{padding:144px 0 0;position:relative}
 .cl-kicker{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;display:flex;align-items:center;gap:6px}
 .cl-kicker::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue)}
-.cl-h{font-size:22px;font-weight:900;letter-spacing:-1px;color:var(--i1);margin-bottom:32px;word-break:keep-all;line-height:1.3}
+.cl-h{font-size:22px;font-weight:900;letter-spacing:-1px;color:var(--t1);margin-bottom:32px;word-break:keep-all;line-height:1.3}
 .cl-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
 .pl{padding:24px 0}
 .pl:nth-child(odd){padding-right:32px;border-right:1px solid var(--bd)}
 .pl:nth-child(even){padding-left:32px}
-.pl-lbl{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--i5);margin-bottom:6px}
-.pl-main{font-size:15px;font-weight:900;letter-spacing:-.3px;color:var(--i1);line-height:1.45;margin-bottom:8px;word-break:keep-all}
-.pl-sub{font-size:13px;color:var(--i3);line-height:1.75;word-break:keep-all}
-
+.pl-lbl{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--t5);margin-bottom:6px}
+.pl-main{font-size:15px;font-weight:900;letter-spacing:-.3px;color:var(--t1);line-height:1.45;margin-bottom:8px;word-break:keep-all}
+.pl-sub{font-size:13px;color:var(--t3);line-height:1.75;word-break:keep-all}
 .footer{padding:32px 0 200px;display:flex;justify-content:space-between}
-.footer span{font-size:12px;color:var(--i5)}
+.footer span{font-size:12px;color:var(--t5)}
 
-/* SHEET */
-.ov{position:fixed;inset:0;background:rgba(25,31,40,.45);z-index:998;opacity:0;pointer-events:none;transition:opacity .3s}
+/* ─── SHEET ─── */
+.ov{position:fixed;inset:0;background:rgba(17,17,17,.4);z-index:998;opacity:0;pointer-events:none;transition:opacity .3s}
 .ov.on{opacity:1;pointer-events:auto}
-.sh-panel{position:fixed;bottom:0;left:0;width:100vw;height:100vh;background:#fff;border-radius:20px 20px 0 0;z-index:999;box-shadow:0 -4px 32px rgba(0,0,0,.12);transform:translateY(100%);transition:transform .45s cubic-bezier(.22,1,.36,1),border-radius .3s;display:flex;flex-direction:column;overflow:hidden}
+.sh-panel{position:fixed;bottom:0;left:0;width:100vw;height:100vh;background:#fff;border-radius:20px 20px 0 0;z-index:999;box-shadow:0 -4px 40px rgba(0,0,0,.1);transform:translateY(100%);transition:transform .45s cubic-bezier(.22,1,.36,1),border-radius .3s;display:flex;flex-direction:column;overflow:hidden}
 .sh-panel.peek{transform:translateY(30%)}
 .sh-panel.full{transform:translateY(0);border-radius:0}
 .sh-drag{flex-shrink:0;height:28px;display:flex;justify-content:center;align-items:center;cursor:grab;user-select:none;touch-action:none}
 .sh-drag:active{cursor:grabbing}
 .sh-handle{width:36px;height:4px;border-radius:2px;background:#DDE1E7}
-.sh-top{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 24px 10px}
-.sh-ttl{font-size:13px;font-weight:700;color:var(--i3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:75%}
-.sh-x{width:28px;height:28px;border-radius:50%;background:var(--bg);border:none;font-size:13px;color:var(--i4);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.sh-top{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 28px 10px}
+.sh-ttl{font-size:13px;font-weight:700;color:var(--t4);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:75%}
+.sh-x{width:28px;height:28px;border-radius:50%;background:var(--bg);border:none;font-size:13px;color:var(--t4);cursor:pointer;display:flex;align-items:center;justify-content:center}
 .sh-hint{flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:5px;padding:0 0 10px;font-size:11px;font-weight:600;color:var(--blue);transition:opacity .2s}
 .sh-hint svg{animation:hb 1.5s infinite}
 @keyframes hb{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
 .sh-panel.full .sh-hint{opacity:0;height:0;padding:0;overflow:hidden}
 .sh-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 
-/* ── DETAIL (시트 내부) ── */
-.dw{padding:0 28px 100px}
+/* ─── DETAIL ─── */
+/* 5. 줄 길이 제한 + 넉넉한 간격 */
+.dw{
+  padding:0 28px 100px;
+  max-width:var(--content-w);
+  margin:0 auto;
+}
 
-/* 3. 제목 행 — 기간 우측 배치 */
-.d-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:12px}
-.d-title{font-size:24px;font-weight:900;letter-spacing:-1px;color:var(--i1);word-break:keep-all;line-height:1.38;flex:1}
-.d-period{font-size:12px;font-weight:500;color:var(--i5);white-space:nowrap;padding-top:6px;flex-shrink:0}
-
+/* 헤더 영역 */
 .d-tag{display:inline-block;margin-top:40px;margin-bottom:10px;font-size:11px;font-weight:700;color:var(--blue);background:var(--blue-bg);padding:3px 10px;border-radius:6px}
-.d-summary{font-size:14px;color:var(--i3);line-height:1.78;word-break:keep-all;padding-bottom:24px}
-.d-summary b{color:var(--i2);font-weight:700}
+.d-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:8px}
+/* 6. 제목 강한 대비 */
+.d-title{font-size:24px;font-weight:900;letter-spacing:-1px;color:var(--t1);word-break:keep-all;line-height:1.38;flex:1}
+/* 6. 기간 회색 */
+.d-period{font-size:12px;font-weight:500;color:var(--t4);white-space:nowrap;padding-top:6px;flex-shrink:0}
+/* 6. 요약 본문 */
+.d-summary{font-size:14px;color:var(--t2);line-height:1.8;word-break:keep-all;padding-bottom:0}
+.d-summary b{color:var(--t1);font-weight:700}
 
-/* 성과 수치 */
-.d-nums{display:flex;flex-wrap:wrap;gap:10px;padding:20px 0}
-.d-num{flex:1;min-width:80px;background:var(--bg);border-radius:10px;padding:14px 14px}
-.d-num-n{font-size:22px;font-weight:900;letter-spacing:-.8px;color:var(--blue);line-height:1;margin-bottom:5px}
-.d-num-l{font-size:11px;font-weight:500;color:var(--i3);line-height:1.4;word-break:keep-all}
+/* ─ 구분선 ─ */
+.d-divider{height:1px;background:var(--bd);margin:var(--gap-block) 0}
+
+/* 성과 수치 카드 — 5. 결과 강조 */
+.d-nums{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:0;padding-top:40px}
+.d-num{
+  flex:1;min-width:100px;
+  background:linear-gradient(135deg,#EBF3FF 0%,#F8FAFF 100%);
+  border:1px solid var(--blue-bd);
+  border-radius:12px;
+  padding:18px 16px;
+  box-shadow:0 2px 8px rgba(49,130,246,.07);
+}
+/* 5. 숫자 크게 */
+.d-num-n{font-size:26px;font-weight:900;letter-spacing:-.8px;color:var(--blue);line-height:1;margin-bottom:6px}
+.d-num-l{font-size:12px;font-weight:500;color:var(--t4);line-height:1.4;word-break:keep-all}
 
 /* 갤러리 */
-.d-gallery{display:flex;gap:8px;margin-top:20px;border-radius:12px;overflow:hidden;background:var(--bg);border:1px solid var(--bd)}
+.d-gallery{display:flex;gap:8px;border-radius:12px;overflow:hidden;background:var(--bg);border:1px solid var(--bd)}
 .d-gallery img{flex:1;min-width:0;object-fit:cover;display:block;height:200px}
 
-/* Q/A/R */
-.d-qlbl{font-size:10px;font-weight:700;letter-spacing:.8px;color:var(--i4);text-transform:uppercase;display:flex;align-items:center;gap:8px;margin:24px 0 6px}
+/* Q/A/R 블록 — 구조 개선 */
+/* 4. Q/A/R 아이콘 작게 + 배경 연하게 */
+.d-qlbl{font-size:10px;font-weight:700;letter-spacing:.8px;color:var(--t5);text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:6px}
 .d-qlbl::before,.d-qlbl::after{content:'';flex:1;height:1px;background:var(--bd)}
-.d-step{display:grid;grid-template-columns:22px 1fr;gap:0 12px;padding:14px 0}
-.d-dot{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;margin-top:2px}
-.dq{background:var(--bg);color:var(--i4);border:1px solid var(--bd)}
-.da{background:var(--blue);color:#fff}
-.dr{background:var(--i1);color:#fff}
-.d-lbl{font-size:9px;font-weight:700;letter-spacing:.4px;color:var(--i5);text-transform:uppercase;margin-bottom:4px}
-.d-txt{font-size:13px;color:var(--i2);line-height:1.78;word-break:keep-all}
-.d-txt b{color:var(--i1);font-weight:700}
 
-/* 4. 사용 도구 — hover tooltip 없이 단순 태그만 */
-/* 7. 사용 도구 글씨 회색 */
-.d-tools{margin-top:24px;padding:14px 16px;background:var(--bg);border-radius:10px;display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap}
-.d-tlbl{font-size:11px;font-weight:600;color:var(--i4);flex-shrink:0;padding-top:3px}
-.dtool{font-size:11px;font-weight:500;color:var(--i4);background:#fff;border:1px solid var(--bd);border-radius:6px;padding:4px 10px;white-space:nowrap}
+/* 1. QAR를 개별 카드로 분리 */
+.d-block{padding:var(--gap-block) 0;border-bottom:1px solid var(--bg)}
+.d-block:last-of-type{border-bottom:none}
+.d-block-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+/* 4. 아이콘 작고 배경 연하게 */
+.d-dot{
+  width:18px;height:18px;
+  border-radius:50%;
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:7px;font-weight:700;
+}
+.dq{background:#F0F2F5;color:var(--t4)}
+.da{background:var(--blue-bg);color:var(--blue)}
+.dr{background:#111;color:#fff}
+/* 4. 레이블 — 텍스트가 주인공 */
+.d-lbl{font-size:13px;font-weight:600;letter-spacing:.2px;color:var(--t3);text-transform:none}
+/* 4. 본문 텍스트 강조 */
+.d-txt{font-size:13px;color:var(--t3);line-height:1.82;word-break:keep-all}
+.d-txt b{color:var(--t2);font-weight:700}
+/* A 해결방안 — 리스트 스타일 */
+.d-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:7px}
+.d-list li{font-size:13px;color:var(--t3);line-height:1.42;word-break:keep-all;padding-left:16px;position:relative}
+.d-list li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:#111}
+.d-list li b{color:var(--t2);font-weight:700}
+/* R 성과 — 강조 */
+.d-result{font-size:14px;color:var(--t1);line-height:1.82;word-break:keep-all;font-weight:500}
+.d-result b{color:var(--blue);font-weight:700}
+/* 성과 리스트 — 해결방안과 동일 구조, 블렛 검정 */
+.d-rlist{list-style:none;padding:0;display:flex;flex-direction:column;gap:7px}
+.d-rlist li{font-size:13px;color:var(--t3);line-height:1.42;word-break:keep-all;padding-left:16px;position:relative;font-weight:500}
+.d-rlist li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:#111}
+.d-rlist li b{color:var(--t2);font-weight:700}
 
-/* 2. 회고 — 카드 없이 일반 텍스트 */
-.d-retro{margin-top:24px}
-.d-retro-lbl{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--i5);margin-bottom:8px}
-.d-retro-txt{font-size:13px;color:var(--i3);line-height:1.78;word-break:keep-all}
+/* 사용 도구 */
+.d-tools{display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;margin-top:var(--gap-block)}
+.d-tlbl{font-size:13px;font-weight:600;color:var(--t3);flex-shrink:0;padding-top:3px}
+.dtool{font-size:13px;font-weight:500;color:var(--t3);background:#fff;border:1px solid var(--bd);border-radius:6px;padding:4px 10px;white-space:nowrap}
 
-/* 동료의 한마디 — 가장 아래 */
-.d-quote{margin-top:32px;padding:20px 20px;background:var(--bg);border-radius:12px}
-.d-qlabel{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
-.d-qtext{font-size:13px;color:var(--i3);line-height:1.78;word-break:keep-all}
+/* 회고 */
+.d-retro{padding-top:4px}
+.d-retro-lbl{font-size:13px;font-weight:600;letter-spacing:.2px;color:var(--t3);text-transform:none;margin-bottom:8px}
+.d-retro-txt{font-size:13px;color:var(--t3);line-height:1.82;word-break:keep-all}
+
+/* 동료의 한마디 */
+.d-quote{padding:20px 20px;background:var(--bg);border-radius:12px}
+.d-qlabel{font-size:13px;font-weight:600;letter-spacing:.2px;color:var(--t3);text-transform:none;margin-bottom:10px}
+.d-qtext{font-size:13px;color:var(--t3);line-height:1.82;word-break:keep-all}
 
 @media(max-width:640px){
   .nav-links{display:none}
@@ -214,6 +242,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
   .pl:nth-child(even){padding-left:0}
   .d-title-row{flex-direction:column;gap:4px}
   .d-period{padding-top:0}
+  .dw{padding:0 20px 80px}
 }
 </style>
 </head>
@@ -255,7 +284,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
       <h1 class="hero-h1">고객의 목소리를<br>구조로 바꾸는 사람</h1>
     </div>
     <div class="hero-bottom">
-      <p class="hero-desc">단순한 불만 대응을 넘어, 고객의 언어를 비즈니스 언어로 번역하여<br>제품 조직의 성장을 리드하는 CX 엔지니어링을 수행합니다.</p>
+      <p class="hero-desc">단순한 불만 대응을 넘어, 고객의 언어를 비즈니스 언어로 번역하여<br>제품 조직의 성장을 이끄는 CX를 수행합니다.</p>
       <div class="hero-contact">✉ lilyyl509@naver.com &nbsp;/&nbsp; ☏ 010.4574.0509</div>
     </div>
     <div class="hero-scroll">↓</div>
@@ -271,79 +300,112 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
     </div>
   </div>
 
-  <!-- ─── S01 ─── -->
+  <!-- ═══ S01 ═══ -->
   <div class="proj up" id="s01" onclick="openSheet(this)">
     <div class="proj-body">
       <div class="proj-meta"><span class="proj-num">01</span><span class="proj-tag">파이프라인 &amp; 대시보드</span></div>
       <h2 class="proj-title">LLM 기반 VOC 자동 분류 및 실시간 모니터링 구축</h2>
-      <p class="proj-desc">수작업 분류 리소스를 절감하고 의사결정 속도를 높이고자, NLP 데이터 전처리와 <b>실시간 Looker Studio 대시보드 연동 파이프라인을 전사 도입</b>하였습니다.</p>
+      <p class="proj-desc">여러 채널에 흩어진 VoC를 구조화해<br><b>의사결정 속도를 높이는 실시간 파이프라인</b>을 구축하였습니다.</p>
     </div>
     <div class="proj-foot">
-      <span class="proj-stat">860개 티켓 분석 · 442건 반영 · 38건 제안 채택</span>
+      <span class="proj-stat">주 평균 860건 분석 · 442건 반영 · 38건 제안 채택</span>
       <span class="proj-arr">→</span>
     </div>
     <div class="proj-details">
-      <!-- 3. 기간 제목 우측 -->
       <div class="d-title-row">
-        <div><!-- d-tag 들어갈 자리 --></div>
+        <div><!-- tag placeholder --></div>
         <span class="d-period">2025. 02 — 현재</span>
       </div>
-
+      <!-- 1. 요약 카드 3개 -->
       <div class="d-nums">
-        <div class="d-num"><div class="d-num-n" data-target="860" data-suffix="개">0개</div><div class="d-num-l">VOC 유효 과제</div></div>
-        <div class="d-num"><div class="d-num-n" data-target="442" data-suffix="건">0건</div><div class="d-num-l">서비스 반영</div></div>
-        <div class="d-num"><div class="d-num-n" data-target="38" data-suffix="건">0건</div><div class="d-num-l">제안 채택</div></div>
+        <div class="d-num">
+          <div class="d-num-n" data-target="860" data-suffix="건">0건</div>
+          <div class="d-num-l">주 평균 VoC 분석</div>
+        </div>
+        <div class="d-num">
+          <div class="d-num-n" data-target="442" data-suffix="건">0건</div>
+          <div class="d-num-l">신규 티켓 → 서비스 반영</div>
+        </div>
+        <div class="d-num">
+          <div class="d-num-n" data-target="38" data-suffix="건">0건</div>
+          <div class="d-num-l">제안 채택</div>
+        </div>
       </div>
 
-      <div class="d-qlbl">문제 인식 · 해결 방안 · 성과</div>
-      <div class="d-step">
-        <div class="d-dot dq">Q</div>
-        <div><div class="d-lbl">문제 인식</div>
-        <p class="d-txt">VoC는 꾸준히 수집되고 있었으나 <b>여러 채널에 흩어진 채 단순 누적 수준에 머물러</b> 있었습니다. 이로 인해 사내 합의를 이끌어 실제 서비스 개선으로 연결하기 어려운 구조였습니다.</p></div>
-      </div>
-      <div class="d-step">
-        <div class="d-dot da">A</div>
-        <div><div class="d-lbl">해결 방안</div>
-        <p class="d-txt">TextRank 기반 전처리와 <b>LLM 자동 분류</b>를 연동하고, 전사 부서에 공유되는 <b>실시간 VOC 대시보드(Looker Studio)</b>를 구축하였습니다. Google Sheets와 SQL로 VoC 파이프라인을 직접 설계하였습니다.</p></div>
-      </div>
-      <div class="d-step">
-        <div class="d-dot dr">R</div>
-        <div><div class="d-lbl">성과</div>
-        <p class="d-txt">주 평균 860건의 VoC를 분석해 <b>442개 신규 티켓을 도출</b>하였으며, 50건 완료 · 7개 개선 진행 중입니다. AI 기반 검수 프로세스를 도입하여 <b>검증 속도와 운영 효율을 개선</b>하였습니다.</p></div>
+      <div class="d-divider"></div>
+
+      <!-- 문제 블록 -->
+      <div class="d-block">
+        <div class="d-block-head">
+          <span class="d-dot dq">Q</span>
+          <span class="d-lbl">문제 인식</span>
+        </div>
+        <p class="d-txt">
+          VoC는 꾸준히 수집되고 있었으나<br>
+          여러 채널에 흩어진 채 <b>단순 누적 수준에 머물러</b> 있었습니다.<br>
+          사내 합의를 이끌어 서비스 개선으로 연결하기 어려운 구조였습니다.
+        </p>
       </div>
 
-      <!-- 1. 사용 도구 (tooltip 없음) -->
+      <!-- 해결 블록 -->
+      <div class="d-block">
+        <div class="d-block-head">
+          <span class="d-dot da">A</span>
+          <span class="d-lbl">해결 방안</span>
+        </div>
+        <ul class="d-list">
+          <li>TextRank 기반 전처리와 <b>LLM 자동 분류</b>를 연동하였습니다.</li>
+          <li>전사 부서에 공유되는 <b>실시간 VOC 대시보드(Looker Studio)</b>를 구축하였습니다.</li>
+          <li>Google Sheets · SQL로 <b>VoC 파이프라인을 직접 설계</b>하였습니다.</li>
+        </ul>
+      </div>
+
+      <!-- 성과 블록 -->
+      <div class="d-block">
+        <div class="d-block-head">
+          <span class="d-dot dr">R</span>
+          <span class="d-lbl">성과</span>
+        </div>
+        <ul class="d-rlist">
+          <li>주 평균 860건 VoC를 분석해 <b>442개 신규 티켓 도출</b> — 50건 완료 · 7건 진행 중</li>
+          <li>AI 기반 검수 프로세스 도입으로 <b>검증 속도와 운영 효율 개선</b></li>
+        </ul>
+      </div>
+
+      <div class="d-divider"></div>
+
+      <!-- 사용 도구 -->
       <div class="d-tools">
         <span class="d-tlbl">사용 도구</span>
         <span class="dtool">Looker Studio</span>
-        <span class="dtool">Google Sheets / SQL</span>
+        <span class="dtool">Google Sheets</span>
+        <span class="dtool">SQL</span>
         <span class="dtool">Claude (LLM)</span>
-        <span class="dtool">TextRank</span>
       </div>
 
-      <!-- 2. 회고 — 카드 없이 -->
-      <div class="d-retro">
+      <!-- 회고 -->
+      <div class="d-retro" style="margin-top:24px">
         <div class="d-retro-lbl">회고</div>
-        <p class="d-retro-txt">리뷰에서 반복적으로 드러나는 문제를 놓치지 않기 위해 세밀하게 분석하고 실제 개선까지 연결해왔습니다. 과정 속에서 '완벽한 정리'에 집중하면 실행이 늦어질 수 있다는 점을 깨달았습니다. 이후에는 핵심을 빠르게 구조화하고, 실행을 통해 검증하며 완성도를 높이는 방식을 익혔습니다.</p>
+        <p class="d-retro-txt">리뷰에서 반복적으로 드러나는 문제를 놓치지 않기 위해 세밀하게 분석하고, 실제 개선까지 연결해왔습니다. 과정 속에서 '완벽한 정리'에 집중하면 실행이 늦어질 수 있다는 점을 깨달았습니다. 이후에는 핵심을 빠르게 구조화하고, 실행을 통해 검증하며 완성도를 높이는 방식을 익혔습니다.</p>
       </div>
 
-      <!-- 1. 동료의 한마디 — 가장 아래 -->
-      <div class="d-quote">
+      <!-- 동료의 한마디 -->
+      <div class="d-quote" style="margin-top:24px">
         <div class="d-qlabel">동료의 한마디</div>
-        <p class="d-qtext">라미는 이번에 협업하는 업무가 많아졌는데, 그만큼 라미의 강점이 더 잘 드러났다고 생각해요. VoC를 꼼꼼하게 수집하고, 분석하고, 정리하고, 전달하는 과정에서 놓칠 수 있는 부분까지 하나하나 잘 챙기는 모습을 보여줬습니다. 그런 점들이 정말 인상적이었어요.</p>
+        <p class="d-qtext">라미는 이번에 협업하는 업무가 많아졌는데, 그만큼 라미의 강점이 더 잘 드러났다고 생각해요. VOC를 꼼꼼하게 수집하고, 분석하고, 정리하고, 전달하는 과정에서, 놓칠 수 있는 부분까지 하나하나 잘 챙기는 모습을 보여줬습니다. 그런 점들이 정말 인상적이었어요.</p>
       </div>
     </div>
   </div>
 
-  <!-- ─── S02 ─── -->
+  <!-- ═══ S02 ═══ -->
   <div class="proj up" id="s02" onclick="openSheet(this)">
     <div class="proj-body">
       <div class="proj-meta"><span class="proj-num">02</span><span class="proj-tag">고객 여정 지도</span></div>
       <h2 class="proj-title">터치포인트 전수 점검 및 개선 과제 구조화</h2>
-      <p class="proj-desc">파편화된 제품 경험으로 인한 고객 이탈 방어를 위해, 핵심 유저 저니를 전 구간 해체하고 <b>모든 터치포인트의 병목 현상을 진단</b>하였습니다.</p>
+      <p class="proj-desc">핵심 유저 저니를 전 구간 해체하고<br><b>모든 터치포인트의 병목을 진단·구조화</b>하였습니다.</p>
     </div>
     <div class="proj-foot">
-      <span class="proj-stat">55개 개선 포인트 도출 · 14건 제안 · 9건 반영</span>
+      <span class="proj-stat">55개 개선 포인트 · 14건 제안 · 9건 반영</span>
       <span class="proj-arr">→</span>
     </div>
     <div class="proj-details">
@@ -351,33 +413,69 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
         <div></div>
         <span class="d-period">2023. 03 — 2023. 12</span>
       </div>
+      <div class="d-nums">
+        <div class="d-num">
+          <div class="d-num-n" data-target="55" data-suffix="개">0개</div>
+          <div class="d-num-l">개선 포인트 도출</div>
+        </div>
+        <div class="d-num">
+          <div class="d-num-n" data-target="14" data-suffix="건">0건</div>
+          <div class="d-num-l">과제 제안</div>
+        </div>
+        <div class="d-num">
+          <div class="d-num-n" data-target="9" data-suffix="건">0건</div>
+          <div class="d-num-l">서비스 반영</div>
+        </div>
+      </div>
+
+      <div class="d-divider"></div>
 
       <div class="d-gallery">
         <img src="img_journey.png" alt="고객 핵심 여정 지도">
         <img src="img_touchpoint.png" alt="터치포인트 및 개선 필요점 정리">
       </div>
 
-      <div class="d-nums">
-        <div class="d-num"><div class="d-num-n" data-target="55" data-suffix="개">0개</div><div class="d-num-l">개선 포인트</div></div>
-        <div class="d-num"><div class="d-num-n" data-target="14" data-suffix="건">0건</div><div class="d-num-l">과제 제안</div></div>
-        <div class="d-num"><div class="d-num-n" data-target="9" data-suffix="건">0건</div><div class="d-num-l">서비스 반영</div></div>
+      <div class="d-divider"></div>
+
+      <div class="d-block">
+        <div class="d-block-head">
+          <span class="d-dot dq">Q</span>
+          <span class="d-lbl">문제 인식</span>
+        </div>
+        <p class="d-txt">
+          고객 여정을 정리한 문서가 없어<br>
+          각 부서가 <b>단편적인 경험에 의존</b>하여 업무를 처리하였습니다.<br>
+          동일한 이슈가 반복되고 고객 경험의 일관성이 저하되었습니다.
+        </p>
       </div>
 
-      <div class="d-qlbl">문제 인식 · 해결 방안 · 성과</div>
-      <div class="d-step">
-        <div class="d-dot dq">Q</div>
-        <div><div class="d-lbl">문제 인식</div>
-        <p class="d-txt">고객 여정을 정리한 문서가 없어 <b>각 부서가 단편적인 경험에 의존</b>하여 업무를 처리하였습니다. 이로 인해 동일한 이슈가 반복되고 고객 경험의 일관성이 저하되었습니다.</p></div>
+      <div class="d-block">
+        <div class="d-block-head">
+          <span class="d-dot da">A</span>
+          <span class="d-lbl">해결 방안</span>
+        </div>
+        <ul class="d-list">
+          <li>
+            <b>고객 핵심 여정 지도 제작</b><br>
+            <span style="font-size:13px;color:var(--t3);font-weight:400">소셜 매치·구장 예약·팀 서비스 등 각 서비스 이용 절차를 정리하였습니다.</span>
+          </li>
+          <li>
+            <b>터치포인트 전수 정리</b><br>
+            <span style="font-size:13px;color:var(--t3);font-weight:400">사용자가 서비스를 이용하며 확인하는 화면(터치포인트)을 정리하여 개선 필요 사항을 도출하고 업무 효율성을 향상하였습니다.</span>
+          </li>
+        </ul>
       </div>
-      <div class="d-step">
-        <div class="d-dot da">A</div>
-        <div><div class="d-lbl">해결 방안</div>
-        <p class="d-txt">① <b>고객 핵심 여정 지도 제작</b>: 소셜 매치, 구장 예약, 팀 서비스 등 각 서비스 이용 절차를 정리하여 서비스 이용 과정을 점검하고 내부 구성원의 이해도를 향상하였습니다.<br>② <b>터치포인트 정리</b>: 사용자가 서비스를 이용하며 확인하는 화면(터치포인트)을 정리하여 개선 필요 사항을 도출하고 업무 효율성을 향상하였습니다.</p></div>
-      </div>
-      <div class="d-step">
-        <div class="d-dot dr">R</div>
-        <div><div class="d-lbl">성과</div>
-        <p class="d-txt">프로세스 개선안 <b>14건 제안 및 9건 반영</b>. 내부 구성원의 서비스 이해도와 신규 입사자 온보딩 속도가 향상되었습니다. 터치포인트 통합 관리로 <b>CX 대응 효율을 극대화</b>하였습니다.</p></div>
+
+      <div class="d-block">
+        <div class="d-block-head">
+          <span class="d-dot dr">R</span>
+          <span class="d-lbl">성과</span>
+        </div>
+        <ul class="d-rlist">
+          <li>개선안 <b>14건 제안 · 9건 서비스 반영</b></li>
+          <li>내부 구성원 서비스 이해도 및 신규 입사자 온보딩 속도 향상</li>
+          <li>터치포인트 통합 관리로 <b>CX 대응 효율 극대화</b></li>
+        </ul>
       </div>
 
       <div class="d-tools">
@@ -388,24 +486,24 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
         <span class="dtool">Notion</span>
       </div>
 
-      <div class="d-retro">
+      <div class="d-retro" style="margin-top:24px">
         <div class="d-retro-lbl">회고</div>
-        <p class="d-retro-txt">고객 여정을 단계별로 분해하고 핵심 터치포인트를 시각화함으로써, 여러 팀이 각자 바라보던 문제를 하나의 흐름 속에서 함께 조망할 수 있도록 만들었습니다.</p>
+        <p class="d-retro-txt">고객 여정을 단계별로 분해하고 핵심 터치포인트를 시각화함으로써, 여러 팀이 각자 보던 문제를 하나의 흐름 속에서 바라볼 수 있게 만들었습니다.</p>
       </div>
 
-      <div class="d-quote">
+      <div class="d-quote" style="margin-top:24px">
         <div class="d-qlabel">동료의 한마디</div>
-        <p class="d-qtext">라미는 보이지 않는 CX를 책임져요. 크게 드러나지 않을 수 있는 영역이라 조급함과 어려움이 많을 것이라고 생각하는데, 묵묵히 좋은 퀄리티로 달성해가는 모습은 귀감이 되고 저를 반성하게 돼요.</p>
+        <p class="d-qtext">라미는 보이지 않는 CX를 책임져요. 사실 크게 드러나지 않을 수 있는 영역이라 조급함, 어려움이 많을 것이라고 생각하는데 묵묵히 좋은 퀄리티로 달성해가는 모습은 귀감이 되고 저를 반성하게 돼요.</p>
       </div>
     </div>
   </div>
 
-  <!-- ─── S03 ─── -->
+  <!-- ═══ S03 ═══ -->
   <div class="proj up" id="s03" onclick="openSheet(this)">
     <div class="proj-body">
       <div class="proj-meta"><span class="proj-num">03</span><span class="proj-tag">가이드 사이트 구축</span></div>
       <h2 class="proj-title">구장주 대상 정책 가이드 사이트 제작</h2>
-      <p class="proj-desc">산재된 정책 문서를 일원화하기 위해, 개발 리소스 없이 <b>No-Code 툴로 정책 가이드(KM) 통합 사이트를 자체 구축</b>하였습니다.</p>
+      <p class="proj-desc">반복 문의를 줄이기 위해 No-Code 툴로<br><b>구장주 통합 안내 사이트를 자체 구축</b>하였습니다.</p>
     </div>
     <div class="proj-foot">
       <span class="proj-stat">일평균 방문자 114% 증가 · 상담 문의 43% 감소</span>
@@ -416,62 +514,92 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
         <div></div>
         <span class="d-period">2024. 10 — 현재</span>
       </div>
+      <div class="d-nums">
+        <div class="d-num">
+          <div class="d-num-n" data-target="114" data-suffix="%">0%</div>
+          <div class="d-num-l">일평균 방문자 증가<br>(1월 → 9월)</div>
+        </div>
+        <div class="d-num">
+          <div class="d-num-n" data-target="43" data-suffix="%">0%</div>
+          <div class="d-num-l">상담 문의 감소<br>(1년간)</div>
+        </div>
+      </div>
+
+      <div class="d-divider"></div>
 
       <div class="d-gallery">
         <img src="img_guide1.png" alt="구장주 가이드 메인">
         <img src="img_guide2.png" alt="구장주 가이드 상세">
       </div>
 
-      <div class="d-nums">
-        <div class="d-num"><div class="d-num-n" data-target="114" data-suffix="%">0%</div><div class="d-num-l">일평균 방문자 증가</div></div>
-        <div class="d-num"><div class="d-num-n" data-target="43" data-suffix="%">0%</div><div class="d-num-l">상담 문의 감소</div></div>
+      <div class="d-divider"></div>
+
+      <div class="d-block">
+        <div class="d-block-head">
+          <span class="d-dot dq">Q</span>
+          <span class="d-lbl">문제 인식</span>
+        </div>
+        <p class="d-txt">
+          구장주 문의가 지속 증가하였으나<br>
+          <b>안내 경로가 명확하지 않아 동일한 문의가 반복</b> 발생하였습니다.<br>
+          제휴 구장 수 증가가 커뮤니케이션 비용 확대로 이어졌습니다.
+        </p>
       </div>
 
-      <div class="d-qlbl">문제 인식 · 해결 방안 · 성과</div>
-      <div class="d-step">
-        <div class="d-dot dq">Q</div>
-        <div><div class="d-lbl">문제 인식</div>
-        <p class="d-txt">구장주 문의가 지속 증가하였으나 <b>안내 경로가 명확하지 않아 동일한 문의가 반복</b> 발생하였습니다. 증가하는 제휴 구장 수는 커뮤니케이션 비용과 운영 리소스 확대로 이어졌습니다.</p></div>
+      <div class="d-block">
+        <div class="d-block-head">
+          <span class="d-dot da">A</span>
+          <span class="d-lbl">해결 방안</span>
+        </div>
+        <ul class="d-list">
+          <li>구장주 <b>통합 안내 경로를 신설</b>하였습니다.</li>
+          <li>신규 제휴 기초 안내부터 업데이트·공지까지 <b>한곳에 통합 게시</b>하였습니다.</li>
+          <li>Google Analytics로 효과를 지속 검증하였습니다.</li>
+        </ul>
       </div>
-      <div class="d-step">
-        <div class="d-dot da">A</div>
-        <div><div class="d-lbl">해결 방안</div>
-        <p class="d-txt">증가하는 문의 수를 선제 대응하기 위해 <b>구장주 통합 안내 경로를 신설</b>하였습니다. 신규 제휴 시 필요한 기초 내용부터 사이트 이용 방법, 서비스 업데이트, 공지 소식을 한곳에 통합 게시하였습니다.</p></div>
-      </div>
-      <div class="d-step">
-        <div class="d-dot dr">R</div>
-        <div><div class="d-lbl">성과</div>
-        <p class="d-txt">2025년 1월 대비 9월 <b>일평균 방문자 수 114% 증가</b>. 1년간 <b>상담 문의 수 43% 감소</b>를 달성하였습니다.</p></div>
+
+      <div class="d-block">
+        <div class="d-block-head">
+          <span class="d-dot dr">R</span>
+          <span class="d-lbl">성과</span>
+        </div>
+        <ul class="d-rlist">
+          <li>2025년 1월 대비 9월 <b>일평균 방문자 수 114% 증가</b></li>
+          <li>1년간 <b>상담 문의 수 43% 감소</b></li>
+        </ul>
       </div>
 
       <div class="d-tools">
         <span class="d-tlbl">사용 도구</span>
         <span class="dtool">Notion</span>
-        <span class="dtool">Oopy</span>
         <span class="dtool">Google Analytics</span>
+        <span class="dtool">Claude</span>
+        <span class="dtool">Vercel</span>
+        <span class="dtool">Github</span>
+        <span class="dtool">Firebase</span>
       </div>
 
-      <div class="d-retro">
+      <div class="d-retro" style="margin-top:24px">
         <div class="d-retro-lbl">회고</div>
-        <p class="d-retro-txt">감으로만 남아 있던 아이디어를 데이터로 검증하여 효과가 있다는 확신을 만들었고, 그 근거를 바탕으로 실행하여 실제 성과로 연결하였습니다.</p>
+        <p class="d-retro-txt">감으로만 남아 있던 아이디어를 데이터로 검증하여 이 행동이 효과가 있다는 확신을 만들었고, 그 근거를 바탕으로 실행하여 실제 성과로 연결하였습니다.</p>
       </div>
 
-      <div class="d-quote">
+      <div class="d-quote" style="margin-top:24px">
         <div class="d-qlabel">동료의 한마디</div>
         <p class="d-qtext">항상 본인의 업무를 꼼꼼히 해요. 이번에 맡은 구장주 가이드는 내용이 깔끔하고 한눈에 잘 정리되어 있어서 인상 깊었어요. 그러한 경험들이 플랩의 서비스에 잘 녹아든다면 좀 더 유저들의 진정성을 끌어들일 수 있는 서비스로 발전이 되지 않을까 합니다.</p>
       </div>
     </div>
   </div>
 
-  <!-- ─── S04 ─── -->
+  <!-- ═══ S04 ═══ -->
   <div class="proj up" id="s04" onclick="openSheet(this)">
     <div class="proj-body">
       <div class="proj-meta"><span class="proj-num">04</span><span class="proj-tag">브랜드 라이팅</span></div>
       <h2 class="proj-title">브랜드 라이팅 가이드 설계 및 조직 내재화</h2>
-      <p class="proj-desc">고객을 향하는 모든 텍스트가 일관된 브랜드 보이스를 전달할 수 있도록 <b>전사 라이팅 가이드를 제정</b>하고, 실무 프로세스에 연동하였습니다.</p>
+      <p class="proj-desc">팀마다 제각각이던 표현 방식을 통일하여<br><b>브랜드 언어의 일관성을 조직 전반에 정착</b>시켰습니다.</p>
     </div>
     <div class="proj-foot">
-      <span class="proj-stat">MVC 체계 수립 · 11팀 공식 적용 · 라이팅봇 자체 제작</span>
+      <span class="proj-stat">11팀 공식 적용 · 35회 공동 테스트 · 라이팅봇 자체 제작</span>
       <span class="proj-arr">→</span>
     </div>
     <div class="proj-details">
@@ -479,28 +607,55 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
         <div></div>
         <span class="d-period">2025. 01 — 현재</span>
       </div>
-
       <div class="d-nums">
-        <div class="d-num"><div class="d-num-n" data-target="11" data-suffix="팀">0팀</div><div class="d-num-l">공식 적용</div></div>
-        <div class="d-num"><div class="d-num-n" data-target="35" data-suffix="회">0회</div><div class="d-num-l">공동 테스트</div></div>
-        <div class="d-num"><div class="d-num-n" data-target="3" data-suffix="개">0개</div><div class="d-num-l">팀 합의점 도출</div></div>
+        <div class="d-num">
+          <div class="d-num-n" data-target="11" data-suffix="팀">0팀</div>
+          <div class="d-num-l">공식 적용</div>
+        </div>
+        <div class="d-num">
+          <div class="d-num-n" data-target="35" data-suffix="회">0회</div>
+          <div class="d-num-l">공동 테스트</div>
+        </div>
+        <div class="d-num">
+          <div class="d-num-n" data-target="11" data-suffix="건">0건</div>
+          <div class="d-num-l">라이팅 검수 요청</div>
+        </div>
       </div>
 
-      <div class="d-qlbl">문제 인식 · 해결 방안 · 성과</div>
-      <div class="d-step">
-        <div class="d-dot dq">Q</div>
-        <div><div class="d-lbl">문제 인식</div>
-        <p class="d-txt">각 팀이 제각각의 표현과 어조로 고객과 소통하여 <b>브랜드 메시지의 일관성이 무너지고</b> 전달 방식이 혼재되어 있었습니다.</p></div>
+      <div class="d-divider"></div>
+
+      <div class="d-block">
+        <div class="d-block-head">
+          <span class="d-dot dq">Q</span>
+          <span class="d-lbl">문제 인식</span>
+        </div>
+        <p class="d-txt">
+          각 팀이 제각각의 표현과 어조로 고객과 소통하여<br>
+          <b>브랜드 메시지의 일관성이 무너지고</b> 전달 방식이 혼재되었습니다.
+        </p>
       </div>
-      <div class="d-step">
-        <div class="d-dot da">A</div>
-        <div><div class="d-lbl">해결 방안</div>
-        <p class="d-txt">① 회사의 <b>MVC 모델을 기반으로 라이팅 원칙을 수립</b>하였습니다.<br>② 원칙의 원활한 적용을 위한 <b>라이팅봇을 제작</b>하였습니다.<br>③ 안내문·가이드·캠페인 등을 전수 점검하여 <b>브랜드 일관성을 확보</b>하였습니다.</p></div>
+
+      <div class="d-block">
+        <div class="d-block-head">
+          <span class="d-dot da">A</span>
+          <span class="d-lbl">해결 방안</span>
+        </div>
+        <ul class="d-list">
+          <li>회사의 <b>MVC 모델을 기반으로 라이팅 원칙을 수립</b>하였습니다.</li>
+          <li>원칙의 원활한 적용을 위한 <b>라이팅봇을 자체 제작</b>하였습니다.</li>
+          <li>안내문·가이드·캠페인 등을 전수 점검하여 <b>브랜드 일관성을 확보</b>하였습니다.</li>
+        </ul>
       </div>
-      <div class="d-step">
-        <div class="d-dot dr">R</div>
-        <div><div class="d-lbl">성과</div>
-        <p class="d-txt">라이팅이 브랜드 경험에 미치는 영향에 대해 <b>조직 전반의 인식을 확산</b>하였습니다. 브랜드 메시지 톤 통일로 고객 커뮤니케이션 일관성을 강화하였으며, <b>11건의 라이팅 검수 요청</b>을 통해 실질적인 업무 기준으로 정착하였습니다.</p></div>
+
+      <div class="d-block">
+        <div class="d-block-head">
+          <span class="d-dot dr">R</span>
+          <span class="d-lbl">성과</span>
+        </div>
+        <ul class="d-rlist">
+          <li><b>11팀이 공식 적용</b> — 브랜드 메시지 톤 통일로 고객 커뮤니케이션 일관성 강화</li>
+          <li>35회 공동 테스트 진행 · <b>11건 라이팅 검수 요청</b>으로 실무 기준 정착</li>
+        </ul>
       </div>
 
       <div class="d-tools">
@@ -509,19 +664,19 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
         <span class="dtool">ChatGPT</span>
       </div>
 
-      <div class="d-retro">
+      <div class="d-retro" style="margin-top:24px">
         <div class="d-retro-lbl">회고</div>
-        <p class="d-retro-txt">무형의 브랜드 가치를 언어로 정립하는 것뿐 아니라, 누구나 가이드를 쉽게 적용하도록 사용 방식까지 설계하는 일이 핵심이었습니다. 가이드를 문서로 남기는 데서 끝나지 않고 실무 적용까지 연결되었을 때 비로소 브랜드의 언어가 완성된다는 것을 확인하였습니다.</p>
+        <p class="d-retro-txt">무형의 브랜드 가치를 언어로 정립하는 것뿐 아니라, 누구나 가이드를 쉽게 적용하도록 사용 방식까지 설계하는 일이 핵심이었습니다. 가이드를 문서로 남기는 데서 끝나지 않고, 실무 적용까지 연결되었을 때 비로소 브랜드의 언어가 완성된다는 걸 확인했습니다.</p>
       </div>
 
-      <div class="d-quote">
+      <div class="d-quote" style="margin-top:24px">
         <div class="d-qlabel">동료의 한마디</div>
         <p class="d-qtext">CX팀뿐만 아니라 구장 관리 사이트의 구장주 가이드 메인 담당자, 라이팅, 매거진 등 다양한 분야에서 라미의 영향력이 확장되고 있다고 느껴집니다. 그 부분은 CX팀의 확장이라고도 생각돼요.</p>
       </div>
     </div>
   </div>
 
-  <!-- ─── 핵심 역량 ─── -->
+  <!-- ═══ 핵심 역량 ═══ -->
   <div class="sh up">
     <div>
       <div class="sh-num">Competency · 05</div>
@@ -531,7 +686,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
 
   <div class="comp-outer up" id="s05">
     <div class="comp-track">
-      <!-- 원본 5장 -->
       <div class="cc">
         <div class="cc-en">Detail-Oriented</div>
         <div class="cc-art">
@@ -556,19 +710,14 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
       <div class="cc">
         <div class="cc-en">Flow Structuring</div>
         <div class="cc-art">
-          <svg viewBox="0 0 82 82" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="11" cy="11" r="7.5" fill="white"/><circle cx="33" cy="11" r="7.5" fill="white"/><circle cx="55" cy="11" r="7.5" fill="white"/><circle cx="77" cy="11" r="7.5" fill="white"/>
-            <circle cx="11" cy="33" r="7.5" fill="white"/><circle cx="33" cy="33" r="7.5" fill="white"/><circle cx="55" cy="33" r="7.5" fill="white"/><circle cx="77" cy="33" r="7.5" fill="white"/>
-            <circle cx="11" cy="55" r="7.5" fill="white"/><circle cx="33" cy="55" r="7.5" fill="white"/><circle cx="55" cy="55" r="7.5" fill="white"/><circle cx="77" cy="55" r="7.5" fill="white"/>
-            <circle cx="11" cy="77" r="7.5" fill="white"/><circle cx="33" cy="77" r="7.5" fill="white"/><circle cx="55" cy="77" r="7.5" fill="white"/><circle cx="77" cy="77" r="7.5" fill="white"/>
-          </svg>
+          <svg viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="6.5" fill="white"/><circle cx="28" cy="9" r="6.5" fill="white"/><circle cx="47" cy="9" r="6.5" fill="white"/><circle cx="66" cy="9" r="6.5" fill="white"/><circle cx="9" cy="28" r="6.5" fill="white"/><circle cx="28" cy="28" r="6.5" fill="white"/><circle cx="47" cy="28" r="6.5" fill="white"/><circle cx="66" cy="28" r="6.5" fill="white"/><circle cx="9" cy="47" r="6.5" fill="white"/><circle cx="28" cy="47" r="6.5" fill="white"/><circle cx="47" cy="47" r="6.5" fill="white"/><circle cx="66" cy="47" r="6.5" fill="white"/><circle cx="9" cy="66" r="6.5" fill="white"/><circle cx="28" cy="66" r="6.5" fill="white"/><circle cx="47" cy="66" r="6.5" fill="white"/><circle cx="66" cy="66" r="6.5" fill="white"/></svg>
         </div>
         <div class="cc-desc">복잡한 고객 여정을 구조화해 더 나은 경험 흐름을 설계합니다.</div>
       </div>
       <div class="cc">
         <div class="cc-en">Execution First</div>
         <div class="cc-art">
-          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 100 104" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="38" r="34" fill="white"/><circle cx="22" cy="80" r="16" fill="white"/><circle cx="57" cy="88" r="9" fill="white"/><circle cx="79" cy="82" r="5" fill="white"/>
           </svg>
         </div>
@@ -583,46 +732,16 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
         </div>
         <div class="cc-desc">문제 정의부터 해결까지 완결합니다.</div>
       </div>
-      <!-- 복제 5장 -->
-      <div class="cc">
-        <div class="cc-en">Detail-Oriented</div>
-        <div class="cc-art">
-          <svg viewBox="0 0 110 88" fill="none"><circle cx="11" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="11" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="11" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="11" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/></svg>
-        </div>
-        <div class="cc-desc">작은 디테일을 관리해 경험의 완성도를 높입니다.</div>
-      </div>
-      <div class="cc">
-        <div class="cc-en">Data · VOC Driven</div>
-        <div class="cc-art">
-          <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="48" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="36" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="24" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="12" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="4" fill="white"/></svg>
-        </div>
-        <div class="cc-desc">VoC와 데이터를 기반으로 고객 문제의 본질을 발견합니다.</div>
-      </div>
-      <div class="cc">
-        <div class="cc-en">Flow Structuring</div>
-        <div class="cc-art">
-          <svg viewBox="0 0 82 82" fill="none"><circle cx="11" cy="11" r="7.5" fill="white"/><circle cx="33" cy="11" r="7.5" fill="white"/><circle cx="55" cy="11" r="7.5" fill="white"/><circle cx="77" cy="11" r="7.5" fill="white"/><circle cx="11" cy="33" r="7.5" fill="white"/><circle cx="33" cy="33" r="7.5" fill="white"/><circle cx="55" cy="33" r="7.5" fill="white"/><circle cx="77" cy="33" r="7.5" fill="white"/><circle cx="11" cy="55" r="7.5" fill="white"/><circle cx="33" cy="55" r="7.5" fill="white"/><circle cx="55" cy="55" r="7.5" fill="white"/><circle cx="77" cy="55" r="7.5" fill="white"/><circle cx="11" cy="77" r="7.5" fill="white"/><circle cx="33" cy="77" r="7.5" fill="white"/><circle cx="55" cy="77" r="7.5" fill="white"/><circle cx="77" cy="77" r="7.5" fill="white"/></svg>
-        </div>
-        <div class="cc-desc">복잡한 고객 여정을 구조화해 더 나은 경험 흐름을 설계합니다.</div>
-      </div>
-      <div class="cc">
-        <div class="cc-en">Execution First</div>
-        <div class="cc-art">
-          <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="38" r="34" fill="white"/><circle cx="22" cy="80" r="16" fill="white"/><circle cx="57" cy="88" r="9" fill="white"/><circle cx="79" cy="82" r="5" fill="white"/></svg>
-        </div>
-        <div class="cc-desc">분석에 머무르지 않고 실행으로 개선을 만듭니다.</div>
-      </div>
-      <div class="cc">
-        <div class="cc-en">Ownership</div>
-        <div class="cc-art">
-          <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="46" stroke="white" stroke-width="5"/></svg>
-        </div>
-        <div class="cc-desc">문제 정의부터 해결까지 완결합니다.</div>
-      </div>
+      <!-- 복제 -->
+      <div class="cc"><div class="cc-en">Detail-Oriented</div><div class="cc-art"><svg viewBox="0 0 110 88" fill="none"><circle cx="11" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="11" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="11" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="11" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/></svg></div><div class="cc-desc">작은 디테일을 관리해 경험의 완성도를 높입니다.</div></div>
+      <div class="cc"><div class="cc-en">Data · VOC Driven</div><div class="cc-art"><svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="48" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="36" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="24" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="12" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="4" fill="white"/></svg></div><div class="cc-desc">VoC와 데이터를 기반으로 고객 문제의 본질을 발견합니다.</div></div>
+      <div class="cc"><div class="cc-en">Flow Structuring</div><div class="cc-art"><svg viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="6.5" fill="white"/><circle cx="28" cy="9" r="6.5" fill="white"/><circle cx="47" cy="9" r="6.5" fill="white"/><circle cx="66" cy="9" r="6.5" fill="white"/><circle cx="9" cy="28" r="6.5" fill="white"/><circle cx="28" cy="28" r="6.5" fill="white"/><circle cx="47" cy="28" r="6.5" fill="white"/><circle cx="66" cy="28" r="6.5" fill="white"/><circle cx="9" cy="47" r="6.5" fill="white"/><circle cx="28" cy="47" r="6.5" fill="white"/><circle cx="47" cy="47" r="6.5" fill="white"/><circle cx="66" cy="47" r="6.5" fill="white"/><circle cx="9" cy="66" r="6.5" fill="white"/><circle cx="28" cy="66" r="6.5" fill="white"/><circle cx="47" cy="66" r="6.5" fill="white"/><circle cx="66" cy="66" r="6.5" fill="white"/></svg></div><div class="cc-desc">복잡한 고객 여정을 구조화해 더 나은 경험 흐름을 설계합니다.</div></div>
+      <div class="cc"><div class="cc-en">Execution First</div><div class="cc-art"><svg viewBox="0 0 100 104" fill="none"><circle cx="50" cy="38" r="34" fill="white"/><circle cx="22" cy="80" r="16" fill="white"/><circle cx="57" cy="88" r="9" fill="white"/><circle cx="79" cy="82" r="5" fill="white"/></svg></div><div class="cc-desc">분석에 머무르지 않고 실행으로 개선을 만듭니다.</div></div>
+      <div class="cc"><div class="cc-en">Ownership</div><div class="cc-art"><svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="46" stroke="white" stroke-width="5"/></svg></div><div class="cc-desc">문제 정의부터 해결까지 완결합니다.</div></div>
     </div>
   </div>
 
-  <!-- ─── 다짐 ─── -->
+  <!-- ═══ 다짐 ═══ -->
   <div class="closing up">
     <div class="cl-kicker">토스뱅크에서의 다짐</div>
     <h2 class="cl-h">고객의 목소리에서<br>미친 만족감의 단서를 찾겠습니다</h2>
@@ -630,22 +749,22 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e5
       <div class="pl">
         <div class="pl-lbl">01 · VOC</div>
         <div class="pl-main">단 한 건의 VOC도 허투루 보내지 않겠습니다</div>
-        <p class="pl-sub">매일 쏟아지는 고객의 말 속에서 제품 혁신의 단서를 찾아 구조화하고, 제품 조직이 움직일 수 있는 데이터로 번역하겠습니다.</p>
+        <p class="pl-sub">매일 쏟아지는 고객의 말 속에서 혁신의 단서를 찾아 구조화하고,<br>제품 조직이 움직일 수 있는 데이터로 번역하겠습니다.</p>
       </div>
       <div class="pl">
         <div class="pl-lbl">02 · CX 엔진</div>
         <div class="pl-main">CX를 성장 엔진으로 만들겠습니다</div>
-        <p class="pl-sub">토스뱅크의 PO · 개발자 · 디자이너와 함께 고객 접점을 제품 혁신의 파이프라인으로 연결하겠습니다.</p>
+        <p class="pl-sub">토스뱅크의 PO · 개발자 · 디자이너와 함께<br>고객 접점을 제품 혁신의 파이프라인으로 연결하겠습니다.</p>
       </div>
       <div class="pl">
         <div class="pl-lbl">03 · 실행</div>
-        <div class="pl-main">시키는 것이 아닌, 만들어내는 CX가 되겠습니다</div>
-        <p class="pl-sub">필요한 것은 직접 만들고 실행하며 조직의 속도를 높이겠습니다. VOC 파이프라인과 가이드 사이트를 직접 구축했던 것처럼.</p>
+        <div class="pl-main">만들어내는 CX가 되겠습니다</div>
+        <p class="pl-sub">필요한 것은 직접 만들고 실행하며 조직의 속도를 높이겠습니다.<br>VOC 파이프라인과 가이드 사이트를 직접 구축했던 것처럼.</p>
       </div>
       <div class="pl">
         <div class="pl-lbl">04 · 파격</div>
-        <div class="pl-main">토스뱅크의 파격을 고객 경험의 언어로 실현하겠습니다</div>
-        <p class="pl-sub">금융의 복잡함을 단순하고 명확하게, 고객이 실제로 느끼는 경험으로 번역하는 역할을 다하겠습니다.</p>
+        <div class="pl-main">금융을 고객의 언어로 만들겠습니다</div>
+        <p class="pl-sub">금융의 복잡함을 단순하고 명확하게,<br>고객이 실제로 느끼는 경험으로 번역하는 역할을 다하겠습니다.</p>
       </div>
     </div>
   </div>
@@ -718,19 +837,13 @@ function openSheet(card){
   sttl.textContent=ttl?ttl.textContent.trim():'';
   let h='';
   if(tag) h+=`<div class="d-tag">${tag.innerHTML}</div>`;
-  if(ttl||det){
-    // 기간 추출
-    const periodEl=det?det.querySelector('.d-period'):null;
-    const periodTxt=periodEl?periodEl.textContent.trim():'';
-    h+=`<div class="d-title-row"><div class="d-title">${ttl?ttl.innerHTML:''}</div>${periodTxt?`<span class="d-period">${periodTxt}</span>`:''}</div>`;
-  }
-  if(desc) h+=`<div class="d-summary">${desc.innerHTML}</div>`;
   if(det){
-    // d-title-row(기간)는 이미 위에서 처리, 원본 det에서 제외하지 않고 innerHTML 전체 사용
-    // 단, 맨 위 d-title-row(빈 div+기간)는 숨김처리
     const clone=det.cloneNode(true);
     const tr=clone.querySelector('.d-title-row');
+    const periodTxt=tr?tr.querySelector('.d-period')?.textContent.trim():'';
     if(tr)tr.remove();
+    h+=`<div class="d-title-row"><div class="d-title">${ttl?ttl.innerHTML:''}</div>${periodTxt?`<span class="d-period">${periodTxt}</span>`:''}</div>`;
+    if(desc) h+=`<div class="d-summary" style="margin-bottom:8px">${desc.innerHTML}</div>`;
     h+=clone.innerHTML;
   }
   sc.innerHTML=h;
