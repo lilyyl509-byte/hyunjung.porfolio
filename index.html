@@ -111,6 +111,10 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-5px)}
 }
+@keyframes ccScroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
 /* gradient shimmer */
 @keyframes ccShimmer{
   0%{background-position:0% 50%}
@@ -132,13 +136,13 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
 
 .comp-track{
   display:flex;gap:16px;
-  padding:10px 28px 20px;
+  padding:10px 28px 20px 28px;
   width:max-content;
 }
 
 /* 카드 래퍼 */
 .cc-wrap{
-  flex:0 0 176px;width:176px;height:248px;
+  flex:0 0 168px;width:168px;height:248px;
   perspective:1100px;
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
@@ -312,8 +316,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
 .d-num-l{font-size:12px;font-weight:500;color:var(--t4);line-height:1.4;word-break:keep-all}
 
 /* 갤러리 */
-.d-gallery{display:flex;gap:8px;border-radius:12px;overflow:hidden;background:var(--bg);border:1px solid var(--bd)}
-.d-gallery img{flex:1;min-width:0;object-fit:cover;display:block;height:200px}
+.d-gallery{display:flex;flex-direction:column;gap:12px;margin-top:var(--gap-block)}
+.d-gallery img{width:100%;height:220px;object-fit:cover;display:block;border-radius:20px;border:1px solid var(--bd);box-shadow:0 2px 8px rgba(49,130,246,.07)}
+/* 2장 가로 나란히 */
+.d-gallery.duo{flex-direction:row;gap:10px}
+.d-gallery.duo img{flex:1;min-width:0;height:200px;border-radius:20px;border:1px solid var(--bd);box-shadow:0 2px 8px rgba(49,130,246,.07)}
 
 /* Q/A/R 블록 — 구조 개선 */
 /* 4. Q/A/R 아이콘 작게 + 배경 연하게 */
@@ -446,7 +453,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
       <p class="proj-desc">여러 채널에 흩어진 VoC를 구조화해<br><b>의사결정 속도를 높이는 실시간 파이프라인</b>을 구축하였습니다.</p>
     </div>
     <div class="proj-foot">
-      <span class="proj-stat">주 평균 860건 분석 · 442건 반영 · 38건 제안 채택</span>
+      <span class="proj-stat">신규 티켓 442건 도출 · AI 검수 프로세스 도입 · 실시간 VOC 대시보드 구축</span>
       <span class="proj-arr">→</span>
     </div>
     <div class="proj-details">
@@ -457,17 +464,21 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
       <!-- 1. 요약 카드 3개 -->
       <div class="d-nums">
         <div class="d-num">
-          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">442건</div>
-          <div class="d-num-l">신규 티켓 도출</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">50건</div>
+          <div class="d-num-l">티켓 개선 완료</div>
         </div>
         <div class="d-num">
           <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">AI 검수</div>
           <div class="d-num-l">프로세스 도입</div>
         </div>
         <div class="d-num">
-          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">실시간</div>
-          <div class="d-num-l">VOC 대시보드 구축</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">VoC 대시보드</div>
+          <div class="d-num-l">통합 경로 신설</div>
         </div>
+      </div>
+
+      <div class="d-gallery">
+        <img src="img_voc.png" alt="VoC 대시보드">
       </div>
 
       <div class="d-divider"></div>
@@ -539,7 +550,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
       <p class="proj-desc">핵심 유저 저니를 전 구간 해체하고<br><b>모든 터치포인트의 병목을 진단·구조화</b>하였습니다.</p>
     </div>
     <div class="proj-foot">
-      <span class="proj-stat">55개 개선 포인트 · 14건 제안 · 9건 반영</span>
+      <span class="proj-stat">CX 대응 효율 극대화 · 온보딩 속도 향상 · 개선안 9건 서비스 반영</span>
       <span class="proj-arr">→</span>
     </div>
     <div class="proj-details">
@@ -549,11 +560,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
       </div>
       <div class="d-nums">
         <div class="d-num">
-          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">CX 효율</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">CX 대응 효율</div>
           <div class="d-num-l">터치포인트 통합 관리로 극대화</div>
         </div>
         <div class="d-num">
-          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">온보딩</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">온보딩 효율화</div>
           <div class="d-num-l">신규 입사자 속도 향상</div>
         </div>
         <div class="d-num">
@@ -562,9 +573,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
         </div>
       </div>
 
-      <div class="d-divider"></div>
-
-      <div class="d-gallery">
+      <div class="d-gallery duo">
         <img src="img_journey.png" alt="고객 핵심 여정 지도">
         <img src="img_touchpoint.png" alt="터치포인트 및 개선 필요점 정리">
       </div>
@@ -647,17 +656,15 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
       <div class="d-nums">
         <div class="d-num">
           <div class="d-num-n" data-target="114" data-suffix="%">0%</div>
-          <div class="d-num-l">일평균 방문자 증가<br>(1월 → 9월)</div>
+          <div class="d-num-l">일평균 방문자 증가 (1월 → 9월)</div>
         </div>
         <div class="d-num">
           <div class="d-num-n" data-target="43" data-suffix="%">0%</div>
-          <div class="d-num-l">상담 문의 감소<br>(1년간)</div>
+          <div class="d-num-l">상담 문의 감소 (1년간)</div>
         </div>
       </div>
 
-      <div class="d-divider"></div>
-
-      <div class="d-gallery">
+      <div class="d-gallery duo">
         <img src="img_guide1.png" alt="구장주 가이드 메인">
         <img src="img_guide2.png" alt="구장주 가이드 상세">
       </div>
@@ -724,7 +731,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
       <p class="proj-desc">팀마다 제각각이던 표현 방식을 통일하여<br><b>브랜드 언어의 일관성을 조직 전반에 정착</b>시켰습니다.</p>
     </div>
     <div class="proj-foot">
-      <span class="proj-stat">11팀 공식 적용 · 35회 공동 테스트 · 라이팅봇 자체 제작</span>
+      <span class="proj-stat">조직 전반 인식 확산 · 커뮤니케이션 일관성 강화 · 실무 기준 정착</span>
       <span class="proj-arr">→</span>
     </div>
     <div class="proj-details">
@@ -738,13 +745,18 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
           <div class="d-num-l">브랜드 경험 영향력 조직 전반</div>
         </div>
         <div class="d-num">
-          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">일관성</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">일관성 강화</div>
           <div class="d-num-l">커뮤니케이션 톤 통일</div>
         </div>
         <div class="d-num">
-          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">실무 기준</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">실무 기준 확보</div>
           <div class="d-num-l">라이팅 가이드 정착</div>
         </div>
+      </div>
+
+      <div class="d-gallery duo">
+        <img src="img_writing1.png" alt="라이팅 가이드 구조">
+        <img src="img_writing2.png" alt="라이팅 가이드 시험지">
       </div>
 
       <div class="d-divider"></div>
@@ -859,12 +871,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
           <div class="cc cc-front" style="background:linear-gradient(160deg,#0F1E38 0%,#1D2E50 100%)">
             <div class="cc-front-kw">
               <div class="cc-en1">EXECUTION</div>
-              <div class="cc-en2">FIRST</div>
             </div>
-            <div class="cc-art"><svg viewBox="0 0 100 104" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="38" r="34" fill="white"/><circle cx="22" cy="80" r="16" fill="white"/><circle cx="57" cy="88" r="9" fill="white"/><circle cx="79" cy="82" r="5" fill="white"/></svg></div>
+            <div class="cc-art"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="18,14 82,50 18,86" fill="white" opacity="0.95"/><rect x="86" y="14" width="8" height="72" rx="4" fill="white" opacity="0.6"/></svg></div>
           </div>
           <div class="cc cc-back" style="background:linear-gradient(160deg,#0F1E38 0%,#1D2E50 100%)">
-            <div class="cc-back-label">Execution First</div>
+            <div class="cc-back-label">Execution</div>
             <p class="cc-back-txt">분석에 머무르지 않고<br>실행으로 개선을 만듭니다.</p>
           </div>
         </div>
@@ -889,27 +900,27 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
   <!-- ═══ 다짐 ═══ -->
   <div class="closing up">
     <div class="cl-kicker">토스뱅크에서의 다짐</div>
-    <h2 class="cl-h">고객의 목소리를<br>조직의 언어로 바꾸겠습니다</h2>
+    <h2 class="cl-h">고객의 언어를 제품의 언어로,<br>제품의 언어를 고객의 언어로</h2>
     <div class="cl-grid">
       <div class="pl">
-        <div class="pl-lbl">01 · VOC</div>
-        <div class="pl-main">VoC를 비즈니스 언어로 번역하겠습니다</div>
-        <p class="pl-sub">고객의 말 속에서 패턴을 발견하고, 개선 과제로 구조화해 제품 조직이 실행할 수 있는 근거로 만들겠습니다.</p>
+        <div class="pl-lbl">01 · VOC 통역</div>
+        <div class="pl-main">고객의 언어를 제품팀의 언어로 번역하겠습니다</div>
+        <p class="pl-sub">VoC를 단순 수집에 그치지 않고, Pain-Point를 도출하고 서비스 정책·제도 개선으로 연결하는 통역가 역할을 하겠습니다.</p>
       </div>
       <div class="pl">
         <div class="pl-lbl">02 · Customer Experience Team</div>
-        <div class="pl-main">고객 접점을 혁신의 파이프라인으로 연결하겠습니다</div>
-        <p class="pl-sub">Customer Experience Team의 일원으로서 PO · 개발자 · 디자이너와 함께 고객 경험을 제품 성장의 근거로 만들겠습니다.</p>
+        <div class="pl-main">상담 경험 개선을 넘어 운영 전략을 설계하겠습니다</div>
+        <p class="pl-sub">Customer Experience Team의 일원으로서 고객센터 정책 수립부터 상담 매뉴얼 설계까지, 상담 팀원이 프로페셔널하게 일할 수 있는 구조를 만들겠습니다.</p>
       </div>
       <div class="pl">
-        <div class="pl-lbl">03 · 실행</div>
-        <div class="pl-main">분석에서 실행까지 직접 완결하겠습니다</div>
-        <p class="pl-sub">아이디어를 데이터로 검증하고, 필요한 시스템은 직접 설계해 실행으로 연결하겠습니다. 분석에 머무르지 않는 CX가 되겠습니다.</p>
+        <div class="pl-lbl">03 · 데이터 기반 실행</div>
+        <div class="pl-main">꼼꼼하게 파고들고, 속도감 있게 실행하겠습니다</div>
+        <p class="pl-sub">데이터로 문제를 분석하고 개선 과제를 직접 담당해 실제 운영에 변화를 만들겠습니다. SQL·LLM을 활용한 VoC 구조화 경험을 토스뱅크에서 이어가겠습니다.</p>
       </div>
       <div class="pl">
-        <div class="pl-lbl">04 · 브랜드</div>
-        <div class="pl-main">고객이 느끼는 모든 언어를 설계하겠습니다</div>
-        <p class="pl-sub">안내문 한 줄, 알림 한 문장까지 브랜드 경험으로 만드는 라이팅 기준을 토스뱅크 안에 세우겠습니다.</p>
+        <div class="pl-lbl">04 · 복잡함을 쉽게</div>
+        <div class="pl-main">복잡한 금융을 고객의 언어로 풀어내겠습니다</div>
+        <p class="pl-sub">복잡한 내용을 쉽게 설명하고 간결하게 정리하는 것이 고객 경험의 시작임을 알고 있습니다. 토스뱅크의 고객이 금융을 더 쉽게 느낄 수 있도록 하겠습니다.</p>
       </div>
     </div>
   </div>
@@ -1020,34 +1031,74 @@ function runCounters(root){
   });
 }
 
-// 역량 카드 — 드래그 스크롤 + 클릭 플립
+// 역량 카드 — JS 자동 스크롤 + 드래그 + 클릭 플립
 (function(){
   const outer = document.querySelector('.comp-outer');
-  if(!outer) return;
+  const track = document.getElementById('compTrack');
+  if(!outer || !track) return;
 
-  let isDown=false, startX=0, scrollLeft=0, moved=false;
+  let autoRunning = true;
+  let rafId = null;
+  let isDown = false, startX = 0, startScroll = 0, moved = false;
+  const SPEED = 0.25;
 
+  function hasFlipped(){
+    return [...document.querySelectorAll('.cc-wrap')].some(c=>c.classList.contains('flipped'));
+  }
+
+  function autoScroll(){
+    if(!autoRunning){ rafId=null; return; }
+    outer.scrollLeft += SPEED;
+    const half = track.scrollWidth / 2;
+    if(outer.scrollLeft >= half) outer.scrollLeft -= half;
+    rafId = requestAnimationFrame(autoScroll);
+  }
+  function startAuto(){
+    if(rafId) return;
+    autoRunning = true;
+    rafId = requestAnimationFrame(autoScroll);
+    outer.style.cursor = 'grab';
+  }
+  function stopAuto(){
+    autoRunning = false;
+    if(rafId){ cancelAnimationFrame(rafId); rafId = null; }
+  }
+
+  startAuto();
+
+  // 마우스 드래그 — 항상 가능
   outer.addEventListener('mousedown', e=>{
-    isDown=true; moved=false;
-    startX=e.pageX; scrollLeft=outer.scrollLeft;
+    isDown = true; moved = false;
+    startX = e.pageX; startScroll = outer.scrollLeft;
+    stopAuto();
+    outer.style.cursor = 'grabbing';
+    e.preventDefault();
   });
-  window.addEventListener('mouseup',()=>{ isDown=false; });
+  window.addEventListener('mouseup', ()=>{
+    if(!isDown) return;
+    isDown = false;
+    outer.style.cursor = 'grab';
+    if(!hasFlipped()) startAuto();
+  });
   outer.addEventListener('mousemove', e=>{
     if(!isDown) return;
-    e.preventDefault();
     const dx = e.pageX - startX;
-    if(Math.abs(dx)>5) moved=true;
-    outer.scrollLeft = scrollLeft - dx * 1.1;
+    if(Math.abs(dx) > 4) moved = true;
+    outer.scrollLeft = startScroll - dx;
   });
 
   // 터치
   outer.addEventListener('touchstart', e=>{
-    startX=e.touches[0].pageX; scrollLeft=outer.scrollLeft; moved=false;
+    startX = e.touches[0].pageX; startScroll = outer.scrollLeft; moved = false;
+    stopAuto();
   },{passive:true});
   outer.addEventListener('touchmove', e=>{
     const dx = e.touches[0].pageX - startX;
-    if(Math.abs(dx)>5) moved=true;
-    outer.scrollLeft = scrollLeft - dx;
+    if(Math.abs(dx) > 4) moved = true;
+    outer.scrollLeft = startScroll - dx;
+  },{passive:true});
+  outer.addEventListener('touchend', ()=>{
+    if(!hasFlipped()) startAuto();
   },{passive:true});
 
   // 클릭 플립
@@ -1055,6 +1106,8 @@ function runCounters(root){
     card.addEventListener('click', function(){
       if(moved) return;
       this.classList.toggle('flipped');
+      if(hasFlipped()) stopAuto();
+      else startAuto();
     });
   });
 })();
