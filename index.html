@@ -106,22 +106,141 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
 .proj:hover .proj-arr{background:var(--blue);color:#fff;transform:translateX(2px)}
 
 /* ── 역량 카드 ── */
-.comp-outer{margin-top:16px;overflow:hidden;margin-left:-24px;margin-right:-24px;-webkit-mask:linear-gradient(to right,transparent 0,#000 6%,#000 94%,transparent 100%);mask:linear-gradient(to right,transparent 0,#000 6%,#000 94%,transparent 100%)}
-.comp-track{display:flex;gap:12px;padding:4px 24px 8px;width:max-content;animation:cScroll 32s linear infinite}
-.comp-track:hover{animation-play-state:paused}
-@keyframes cScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.cc{flex:0 0 190px;width:190px;height:260px;border-radius:16px;padding:18px 16px 16px;display:flex;flex-direction:column;gap:0;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.1);transition:transform .25s cubic-bezier(.16,1,.3,1)}
-.cc:nth-child(1),.cc:nth-child(6){background:#0D1B2A}
-.cc:nth-child(2),.cc:nth-child(7){background:#0A1714}
-.cc:nth-child(3),.cc:nth-child(8){background:#0E1526}
-.cc:nth-child(4),.cc:nth-child(9){background:#150D22}
-.cc:nth-child(5),.cc:nth-child(10){background:#0B1826}
-.cc::after{content:'';position:absolute;top:0;left:0;right:0;height:55%;background:linear-gradient(180deg,rgba(255,255,255,.05) 0%,transparent 100%);pointer-events:none;border-radius:16px 16px 0 0}
-.cc:hover{transform:translateY(-4px)}
-.cc-en{font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:900;letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.92);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:relative;z-index:1;flex-shrink:0;margin-bottom:12px}
-.cc-art{display:flex;align-items:center;justify-content:center;position:relative;z-index:1;overflow:visible;flex:1;padding:4px 0}
-.cc-art svg{width:auto;height:auto;max-width:130px;max-height:100px;display:block}
-.cc-desc{font-family:'Noto Sans KR',sans-serif;font-size:11.5px;font-weight:400;color:rgba(255,255,255,.82);line-height:1.55;word-break:keep-all;position:relative;z-index:1;flex-shrink:0;margin-top:10px;letter-spacing:.1px;text-shadow:0 1px 3px rgba(0,0,0,.35)}
+/* float 애니메이션 */
+@keyframes ccFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+}
+/* gradient shimmer */
+@keyframes ccShimmer{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.comp-outer{
+  margin-top:16px;
+  overflow-x:scroll;overflow-y:hidden;
+  scrollbar-width:none;-ms-overflow-style:none;
+  margin-left:-24px;margin-right:-24px;
+  cursor:grab;user-select:none;
+  -webkit-mask:linear-gradient(to right,transparent 0,#000 8%,#000 92%,transparent 100%);
+  mask:linear-gradient(to right,transparent 0,#000 8%,#000 92%,transparent 100%);
+}
+.comp-outer::-webkit-scrollbar{display:none}
+.comp-outer:active{cursor:grabbing}
+
+.comp-track{
+  display:flex;gap:16px;
+  padding:10px 28px 20px;
+  width:max-content;
+}
+
+/* 카드 래퍼 */
+.cc-wrap{
+  flex:0 0 176px;width:176px;height:248px;
+  perspective:1100px;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  /* float 애니메이션 — 각 카드 딜레이는 인라인 style */
+  animation:ccFloat 3.8s ease-in-out infinite;
+}
+
+/* hover: 떠오르기 + scale + 그림자 강화 */
+.cc-wrap:hover .cc-inner{
+  transform:translateY(-6px) scale(1.03) !important;
+  box-shadow:0 12px 30px rgba(0,0,0,.35) !important;
+}
+.cc-wrap.flipped:hover .cc-inner{
+  transform:rotateY(180deg) translateY(-6px) scale(1.03) !important;
+  box-shadow:0 12px 30px rgba(0,0,0,.35) !important;
+}
+
+/* 카드 본체 */
+.cc-inner{
+  width:100%;height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .5s ease-in-out, box-shadow .3s ease;
+  border-radius:18px;
+  box-shadow:0 4px 18px rgba(0,0,0,.28);
+}
+.cc-wrap.flipped .cc-inner{
+  transform:rotateY(180deg);
+}
+
+/* 앞/뒷면 공통 */
+.cc{
+  position:absolute;inset:0;
+  border-radius:18px;overflow:hidden;
+  border:1px solid rgba(49,130,246,.18);
+  -webkit-backface-visibility:hidden;backface-visibility:hidden;
+}
+/* 상단 하이라이트 */
+.cc::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:45%;
+  background:linear-gradient(180deg,rgba(255,255,255,.06) 0%,transparent 100%);
+  pointer-events:none;z-index:0;
+}
+.cc::after{
+  content:'';position:absolute;
+  bottom:-20px;right:-20px;
+  width:80px;height:80px;
+  background:radial-gradient(circle,rgba(49,130,246,.15) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+
+/* ── 앞면 ── */
+.cc-front{
+  padding:22px 18px 20px;
+  display:flex;flex-direction:column;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:0;
+}
+.cc-front-kw{display:flex;flex-direction:column;gap:2px;position:relative;z-index:2}
+.cc-en1{
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:20px;font-weight:900;
+  letter-spacing:.5px;text-transform:uppercase;
+  color:#fff;line-height:1.15;
+}
+.cc-en2{
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:11px;font-weight:700;
+  letter-spacing:.6px;text-transform:uppercase;
+  color:rgba(255,255,255,.38);line-height:1.3;
+}
+
+
+/* ── 뒷면 ── */
+.cc-art{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  overflow:visible;padding:4px 0;
+  position:relative;z-index:2;
+}
+.cc-art svg{width:100%;max-width:120px;max-height:95px;height:auto;display:block;overflow:visible}
+.cc-back{
+  transform:rotateY(180deg);
+  padding:26px 20px;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:flex-start;
+}
+.cc-back-label{
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:.7px;text-transform:uppercase;
+  color:rgba(255,255,255,.65);
+  margin-bottom:12px;
+}
+.cc-back-txt{
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:14px;font-weight:600;
+  color:#ffffff;
+  line-height:1.72;letter-spacing:-.2px;
+  word-break:keep-all;
+}
 
 /* CLOSING */
 .closing{padding:144px 0 0;position:relative}
@@ -338,16 +457,16 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
       <!-- 1. 요약 카드 3개 -->
       <div class="d-nums">
         <div class="d-num">
-          <div class="d-num-n" data-target="860" data-suffix="건">0건</div>
-          <div class="d-num-l">주 평균 VoC 분석</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">442건</div>
+          <div class="d-num-l">신규 티켓 도출</div>
         </div>
         <div class="d-num">
-          <div class="d-num-n" data-target="442" data-suffix="건">0건</div>
-          <div class="d-num-l">신규 티켓 → 서비스 반영</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">AI 검수</div>
+          <div class="d-num-l">프로세스 도입</div>
         </div>
         <div class="d-num">
-          <div class="d-num-n" data-target="38" data-suffix="건">0건</div>
-          <div class="d-num-l">제안 채택</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">실시간</div>
+          <div class="d-num-l">VOC 대시보드 구축</div>
         </div>
       </div>
 
@@ -359,11 +478,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
           <span class="d-dot dq">Q</span>
           <span class="d-lbl">문제 인식</span>
         </div>
-        <p class="d-txt">
-          VoC는 꾸준히 수집되고 있었으나<br>
-          여러 채널에 흩어진 채 <b>단순 누적 수준에 머물러</b> 있었습니다.<br>
-          사내 합의를 이끌어 서비스 개선으로 연결하기 어려운 구조였습니다.
-        </p>
+        <p class="d-txt">VoC는 꾸준히 수집되고 있었지만 여러 채널에 흩어져 있고, 단순 누적 수준에 머물러 있었습니다. 따라서 사내 합의를 이끌어 실제 서비스 기능 개선으로 이어지기 어려웠습니다.</p>
       </div>
 
       <!-- 해결 블록 -->
@@ -373,9 +488,9 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
           <span class="d-lbl">해결 방안</span>
         </div>
         <ul class="d-list">
-          <li>TextRank 기반 전처리와 <b>LLM 자동 분류</b>를 연동하였습니다.</li>
-          <li>전사 부서에 공유되는 <b>실시간 VOC 대시보드(Looker Studio)</b>를 구축하였습니다.</li>
-          <li>Google Sheets · SQL로 <b>VoC 파이프라인을 직접 설계</b>하였습니다.</li>
+          <li><b>분석 및 인사이트 도출</b><br><span style="font-size:13px;color:var(--t3);font-weight:400">TextRank 기반 요약과 LLM 보조 분류를 통해 주요 불만·제안 패턴을 정량화하였습니다.</span></li>
+          <li><b>개선 연계</b><br><span style="font-size:13px;color:var(--t3);font-weight:400">시설·매니저·시스템 오류 등 각 분야 다빈도 VoC 항목을 서비스 개선 프로젝트로 연결하였습니다.</span></li>
+          <li><b>VOC 데이터 구조화</b><br><span style="font-size:13px;color:var(--t3);font-weight:400">Google Sheets와 SQL을 활용해 흩어진 VoC 데이터를 통합 관리하고, 분석 가능한 형태로 정리하였습니다.</span></li>
         </ul>
       </div>
 
@@ -386,8 +501,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
           <span class="d-lbl">성과</span>
         </div>
         <ul class="d-rlist">
-          <li>주 평균 860건 VoC를 분석해 <b>442개 신규 티켓 도출</b> — 50건 완료 · 7건 진행 중</li>
-          <li>AI 기반 검수 프로세스 도입으로 <b>검증 속도와 운영 효율 개선</b></li>
+          <li>주 평균 <b>860건의 VoC를 분석</b>해 442개 신규 티켓 도출 및 50건 완료, 7개 개선 진행 중</li>
+          <li>AI를 활용한 <b>검수 프로세스 도입</b>으로 검증 속도와 운영 효율 개선</li>
         </ul>
       </div>
 
@@ -434,16 +549,16 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
       </div>
       <div class="d-nums">
         <div class="d-num">
-          <div class="d-num-n" data-target="55" data-suffix="개">0개</div>
-          <div class="d-num-l">개선 포인트 도출</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">CX 효율</div>
+          <div class="d-num-l">터치포인트 통합 관리로 극대화</div>
         </div>
         <div class="d-num">
-          <div class="d-num-n" data-target="14" data-suffix="건">0건</div>
-          <div class="d-num-l">과제 제안</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">온보딩</div>
+          <div class="d-num-l">신규 입사자 속도 향상</div>
         </div>
         <div class="d-num">
-          <div class="d-num-n" data-target="9" data-suffix="건">0건</div>
-          <div class="d-num-l">서비스 반영</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">9건</div>
+          <div class="d-num-l">개선안 서비스 반영</div>
         </div>
       </div>
 
@@ -461,11 +576,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
           <span class="d-dot dq">Q</span>
           <span class="d-lbl">문제 인식</span>
         </div>
-        <p class="d-txt">
-          고객 여정을 정리한 문서가 없어<br>
-          각 부서가 <b>단편적인 경험에 의존</b>하여 업무를 처리하였습니다.<br>
-          동일한 이슈가 반복되고 고객 경험의 일관성이 저하되었습니다.
-        </p>
+        <p class="d-txt">고객 여정을 정리한 문서가 없어 각 부서가 단편적인 경험에 의존해 업무를 처리하여 동일한 이슈가 반복되고 고객 경험의 일관성이 떨어졌습니다.</p>
       </div>
 
       <div class="d-block">
@@ -476,11 +587,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
         <ul class="d-list">
           <li>
             <b>고객 핵심 여정 지도 제작</b><br>
-            <span style="font-size:13px;color:var(--t3);font-weight:400">소셜 매치·구장 예약·팀 서비스 등 각 서비스 이용 절차를 정리하였습니다.</span>
+            <span style="font-size:13px;color:var(--t3);font-weight:400">소셜 매치, 구장 예약, 팀 서비스 등 제공하는 각 서비스 이용 절차 정리를 통해 서비스 이용 과정 점검 및 내부 구성원들의 서비스 이해도를 향상하였습니다.</span>
           </li>
           <li>
             <b>터치포인트 전수 정리</b><br>
-            <span style="font-size:13px;color:var(--t3);font-weight:400">사용자가 서비스를 이용하며 확인하는 화면(터치포인트)을 정리하여<br>개선 필요 사항을 도출하고 업무 효율성을 향상하였습니다.</span>
+            <span style="font-size:13px;color:var(--t3);font-weight:400">사용자가 서비스를 이용하며 확인하는 화면(터치포인트) 정리를 통해<br>개선 필요 사항을 도출하고 업무 효율성을 향상하였습니다.</span>
           </li>
         </ul>
       </div>
@@ -491,9 +602,9 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
           <span class="d-lbl">성과</span>
         </div>
         <ul class="d-rlist">
-          <li>개선안 <b>14건 제안 · 9건 서비스 반영</b></li>
-          <li>내부 구성원 서비스 이해도 및 신규 입사자 온보딩 속도 향상</li>
-          <li>터치포인트 통합 관리로 <b>CX 대응 효율 극대화</b></li>
+          <li>프로세스 개선안 <b>14건 제안 및 9건 반영</b></li>
+          <li>내부 구성원들의 서비스 디테일에 대한 이해도 및 신규 입사자 온보딩 속도 향상</li>
+          <li>서비스 이용 단계별 UI · 알림톡 · 이동 경로 등을 문서화한 터치포인트 통합 관리로 <b>CX 대응 효율 극대화</b></li>
         </ul>
       </div>
 
@@ -558,11 +669,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
           <span class="d-dot dq">Q</span>
           <span class="d-lbl">문제 인식</span>
         </div>
-        <p class="d-txt">
-          구장주 문의가 지속 증가하였으나<br>
-          <b>안내 경로가 명확하지 않아 동일한 문의가 반복</b> 발생하였습니다.<br>
-          제휴 구장 수 증가가 커뮤니케이션 비용 확대로 이어졌습니다.
-        </p>
+        <p class="d-txt">구장주 문의가 지속적으로 증가했지만, 안내 경로가 명확하지 않아 동일한 문의가 반복 발생했습니다. 더불어 계속적으로 증가하는 제휴 구장 수로 인해 커뮤니케이션 비용 등 리소스 확대로 이어졌습니다.</p>
       </div>
 
       <div class="d-block">
@@ -571,9 +678,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
           <span class="d-lbl">해결 방안</span>
         </div>
         <ul class="d-list">
-          <li>구장주 <b>통합 안내 경로를 신설</b>하였습니다.</li>
-          <li>신규 제휴 기초 안내부터 업데이트·공지까지 <b>한곳에 통합 게시</b>하였습니다.</li>
-          <li>Google Analytics로 효과를 지속 검증하였습니다.</li>
+          <li>2024년 내 피리어드 간 평균 83% 증가하는 문의 수 방지를 위해 <b>구장주 통합 안내 경로를 신설</b>하였습니다.</li>
+          <li>신규 제휴 시 서비스 이해를 위해 필요한 기초 내용부터 구장주 전용 사이트 이용 방법, 서비스 업데이트, 최근 공지 소식을 <b>한곳에 통합 게시</b>하였습니다.</li>
         </ul>
       </div>
 
@@ -628,16 +734,16 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
       </div>
       <div class="d-nums">
         <div class="d-num">
-          <div class="d-num-n" data-target="11" data-suffix="팀">0팀</div>
-          <div class="d-num-l">공식 적용</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">인식 확산</div>
+          <div class="d-num-l">브랜드 경험 영향력 조직 전반</div>
         </div>
         <div class="d-num">
-          <div class="d-num-n" data-target="35" data-suffix="회">0회</div>
-          <div class="d-num-l">공동 테스트</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">일관성</div>
+          <div class="d-num-l">커뮤니케이션 톤 통일</div>
         </div>
         <div class="d-num">
-          <div class="d-num-n" data-target="11" data-suffix="건">0건</div>
-          <div class="d-num-l">라이팅 검수 요청</div>
+          <div class="d-num-n" style="font-size:15px;letter-spacing:-.3px">실무 기준</div>
+          <div class="d-num-l">라이팅 가이드 정착</div>
         </div>
       </div>
 
@@ -648,10 +754,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
           <span class="d-dot dq">Q</span>
           <span class="d-lbl">문제 인식</span>
         </div>
-        <p class="d-txt">
-          각 팀이 제각각의 표현과 어조로 고객과 소통하여<br>
-          <b>브랜드 메시지의 일관성이 무너지고</b> 전달 방식이 혼재되었습니다.
-        </p>
+        <p class="d-txt">각 팀이 제각각의 표현과 어조로 고객과 소통해 브랜드 메시지의 일관성이 무너지고, 전달 방식이 혼재되어 있었습니다.</p>
       </div>
 
       <div class="d-block">
@@ -672,8 +775,9 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
           <span class="d-lbl">성과</span>
         </div>
         <ul class="d-rlist">
-          <li><b>11팀이 공식 적용</b> — 브랜드 메시지 톤 통일로 고객 커뮤니케이션 일관성 강화</li>
-          <li>35회 공동 테스트 진행 · <b>11건 라이팅 검수 요청</b>으로 실무 기준 정착</li>
+          <li>라이팅이 브랜드 경험과 일관성에 미치는 영향에 대해 <b>조직 전반에 인식 확산</b></li>
+          <li>브랜드 메시지 톤 통일로 <b>고객 커뮤니케이션 일관성 강화</b></li>
+          <li>11건의 라이팅 검수 요청 확인 및 <b>실질적인 업무 기준으로 정착</b>시키는 데 기여</li>
         </ul>
       </div>
 
@@ -704,86 +808,108 @@ body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(-45deg,#e8
   </div>
 
   <div class="comp-outer up" id="s05">
-    <div class="comp-track">
-      <div class="cc">
-        <div class="cc-en">Detail-Oriented</div>
-        <div class="cc-art">
-          <svg viewBox="0 0 110 88" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="11" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/>
-            <circle cx="11" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/>
-            <circle cx="11" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/>
-            <circle cx="11" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/>
-          </svg>
+    <div class="comp-track" id="compTrack">
+      <div class="cc-wrap" style="animation-delay:0s">
+        <div class="cc-inner">
+          <div class="cc cc-front" style="background:linear-gradient(160deg,#0B1F33 0%,#1A2B4C 100%)">
+            <div class="cc-front-kw">
+              <div class="cc-en1">DETAIL</div>
+              <div class="cc-en2">ORIENTED</div>
+            </div>
+            <div class="cc-art"><svg viewBox="0 0 110 88" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="11" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="11" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="11" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/></svg></div>
+          </div>
+          <div class="cc cc-back" style="background:linear-gradient(160deg,#0B1F33 0%,#1A2B4C 100%)">
+            <div class="cc-back-label">Detail-Oriented</div>
+            <p class="cc-back-txt">작은 디테일을 관리해<br>경험의 완성도를 높입니다.</p>
+          </div>
         </div>
-        <div class="cc-desc">작은 디테일을 관리해 경험의 완성도를 높입니다.</div>
       </div>
-      <div class="cc">
-        <div class="cc-en">Data · VOC Driven</div>
-        <div class="cc-art">
-          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="48" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="36" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="24" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="12" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="4" fill="white"/>
-          </svg>
+      <div class="cc-wrap" style="animation-delay:0.4s">
+        <div class="cc-inner">
+          <div class="cc cc-front" style="background:linear-gradient(160deg,#0F2038 0%,#1E3254 100%)">
+            <div class="cc-front-kw">
+              <div class="cc-en1">DATA</div>
+              <div class="cc-en2">VOC DRIVEN</div>
+            </div>
+            <div class="cc-art"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="36" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="24" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="12" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="4" fill="white"/></svg></div>
+          </div>
+          <div class="cc cc-back" style="background:linear-gradient(160deg,#0F2038 0%,#1E3254 100%)">
+            <div class="cc-back-label">Data · VOC Driven</div>
+            <p class="cc-back-txt">VoC와 데이터를 기반으로<br>고객 문제의 본질을 발견합니다.</p>
+          </div>
         </div>
-        <div class="cc-desc">VoC와 데이터를 기반으로 고객 문제의 본질을 발견합니다.</div>
       </div>
-      <div class="cc">
-        <div class="cc-en">Flow Structuring</div>
-        <div class="cc-art">
-          <svg viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="6.5" fill="white"/><circle cx="28" cy="9" r="6.5" fill="white"/><circle cx="47" cy="9" r="6.5" fill="white"/><circle cx="66" cy="9" r="6.5" fill="white"/><circle cx="9" cy="28" r="6.5" fill="white"/><circle cx="28" cy="28" r="6.5" fill="white"/><circle cx="47" cy="28" r="6.5" fill="white"/><circle cx="66" cy="28" r="6.5" fill="white"/><circle cx="9" cy="47" r="6.5" fill="white"/><circle cx="28" cy="47" r="6.5" fill="white"/><circle cx="47" cy="47" r="6.5" fill="white"/><circle cx="66" cy="47" r="6.5" fill="white"/><circle cx="9" cy="66" r="6.5" fill="white"/><circle cx="28" cy="66" r="6.5" fill="white"/><circle cx="47" cy="66" r="6.5" fill="white"/><circle cx="66" cy="66" r="6.5" fill="white"/></svg>
+      <div class="cc-wrap" style="animation-delay:0.8s">
+        <div class="cc-inner">
+          <div class="cc cc-front" style="background:linear-gradient(160deg,#0B1F33 0%,#243A5E 100%)">
+            <div class="cc-front-kw">
+              <div class="cc-en1">FLOW</div>
+              <div class="cc-en2">STRUCTURING</div>
+            </div>
+            <div class="cc-art"><svg viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="6.5" fill="white"/><circle cx="28" cy="9" r="6.5" fill="white"/><circle cx="47" cy="9" r="6.5" fill="white"/><circle cx="66" cy="9" r="6.5" fill="white"/><circle cx="9" cy="28" r="6.5" fill="white"/><circle cx="28" cy="28" r="6.5" fill="white"/><circle cx="47" cy="28" r="6.5" fill="white"/><circle cx="66" cy="28" r="6.5" fill="white"/><circle cx="9" cy="47" r="6.5" fill="white"/><circle cx="28" cy="47" r="6.5" fill="white"/><circle cx="47" cy="47" r="6.5" fill="white"/><circle cx="66" cy="47" r="6.5" fill="white"/><circle cx="9" cy="66" r="6.5" fill="white"/><circle cx="28" cy="66" r="6.5" fill="white"/><circle cx="47" cy="66" r="6.5" fill="white"/><circle cx="66" cy="66" r="6.5" fill="white"/></svg></div>
+          </div>
+          <div class="cc cc-back" style="background:linear-gradient(160deg,#0B1F33 0%,#243A5E 100%)">
+            <div class="cc-back-label">Flow Structuring</div>
+            <p class="cc-back-txt">복잡한 고객 여정을 구조화해<br>더 나은 경험 흐름을 설계합니다.</p>
+          </div>
         </div>
-        <div class="cc-desc">복잡한 고객 여정을 구조화해 더 나은 경험 흐름을 설계합니다.</div>
       </div>
-      <div class="cc">
-        <div class="cc-en">Execution First</div>
-        <div class="cc-art">
-          <svg viewBox="0 0 100 104" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="38" r="34" fill="white"/><circle cx="22" cy="80" r="16" fill="white"/><circle cx="57" cy="88" r="9" fill="white"/><circle cx="79" cy="82" r="5" fill="white"/>
-          </svg>
+      <div class="cc-wrap" style="animation-delay:1.2s">
+        <div class="cc-inner">
+          <div class="cc cc-front" style="background:linear-gradient(160deg,#0F1E38 0%,#1D2E50 100%)">
+            <div class="cc-front-kw">
+              <div class="cc-en1">EXECUTION</div>
+              <div class="cc-en2">FIRST</div>
+            </div>
+            <div class="cc-art"><svg viewBox="0 0 100 104" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="38" r="34" fill="white"/><circle cx="22" cy="80" r="16" fill="white"/><circle cx="57" cy="88" r="9" fill="white"/><circle cx="79" cy="82" r="5" fill="white"/></svg></div>
+          </div>
+          <div class="cc cc-back" style="background:linear-gradient(160deg,#0F1E38 0%,#1D2E50 100%)">
+            <div class="cc-back-label">Execution First</div>
+            <p class="cc-back-txt">분석에 머무르지 않고<br>실행으로 개선을 만듭니다.</p>
+          </div>
         </div>
-        <div class="cc-desc">분석에 머무르지 않고 실행으로 개선을 만듭니다.</div>
       </div>
-      <div class="cc">
-        <div class="cc-en">Ownership</div>
-        <div class="cc-art">
-          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" stroke="white" stroke-width="5"/>
-          </svg>
+      <div class="cc-wrap" style="animation-delay:1.6s">
+        <div class="cc-inner">
+          <div class="cc cc-front" style="background:linear-gradient(160deg,#0B1F33 0%,#1A2B4C 100%)">
+            <div class="cc-front-kw">
+              <div class="cc-en1">OWNERSHIP</div>
+            </div>
+            <div class="cc-art"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" stroke="white" stroke-width="5"/></svg></div>
+          </div>
+          <div class="cc cc-back" style="background:linear-gradient(160deg,#0B1F33 0%,#1A2B4C 100%)">
+            <div class="cc-back-label">Ownership</div>
+            <p class="cc-back-txt">문제 정의부터 해결까지<br>완결합니다.</p>
+          </div>
         </div>
-        <div class="cc-desc">문제 정의부터 해결까지 완결합니다.</div>
       </div>
-      <!-- 복제 -->
-      <div class="cc"><div class="cc-en">Detail-Oriented</div><div class="cc-art"><svg viewBox="0 0 110 88" fill="none"><circle cx="11" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="11" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="11" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="33" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="11" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="55" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="11" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="33" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="55" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="77" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/><circle cx="99" cy="77" r="10" stroke="white" stroke-width="1.8" fill="none"/></svg></div><div class="cc-desc">작은 디테일을 관리해 경험의 완성도를 높입니다.</div></div>
-      <div class="cc"><div class="cc-en">Data · VOC Driven</div><div class="cc-art"><svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="48" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="36" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="24" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="12" stroke="white" stroke-width="2.5"/><circle cx="50" cy="50" r="4" fill="white"/></svg></div><div class="cc-desc">VoC와 데이터를 기반으로 고객 문제의 본질을 발견합니다.</div></div>
-      <div class="cc"><div class="cc-en">Flow Structuring</div><div class="cc-art"><svg viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="6.5" fill="white"/><circle cx="28" cy="9" r="6.5" fill="white"/><circle cx="47" cy="9" r="6.5" fill="white"/><circle cx="66" cy="9" r="6.5" fill="white"/><circle cx="9" cy="28" r="6.5" fill="white"/><circle cx="28" cy="28" r="6.5" fill="white"/><circle cx="47" cy="28" r="6.5" fill="white"/><circle cx="66" cy="28" r="6.5" fill="white"/><circle cx="9" cy="47" r="6.5" fill="white"/><circle cx="28" cy="47" r="6.5" fill="white"/><circle cx="47" cy="47" r="6.5" fill="white"/><circle cx="66" cy="47" r="6.5" fill="white"/><circle cx="9" cy="66" r="6.5" fill="white"/><circle cx="28" cy="66" r="6.5" fill="white"/><circle cx="47" cy="66" r="6.5" fill="white"/><circle cx="66" cy="66" r="6.5" fill="white"/></svg></div><div class="cc-desc">복잡한 고객 여정을 구조화해 더 나은 경험 흐름을 설계합니다.</div></div>
-      <div class="cc"><div class="cc-en">Execution First</div><div class="cc-art"><svg viewBox="0 0 100 104" fill="none"><circle cx="50" cy="38" r="34" fill="white"/><circle cx="22" cy="80" r="16" fill="white"/><circle cx="57" cy="88" r="9" fill="white"/><circle cx="79" cy="82" r="5" fill="white"/></svg></div><div class="cc-desc">분석에 머무르지 않고 실행으로 개선을 만듭니다.</div></div>
-      <div class="cc"><div class="cc-en">Ownership</div><div class="cc-art"><svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="46" stroke="white" stroke-width="5"/></svg></div><div class="cc-desc">문제 정의부터 해결까지 완결합니다.</div></div>
     </div>
   </div>
 
   <!-- ═══ 다짐 ═══ -->
   <div class="closing up">
     <div class="cl-kicker">토스뱅크에서의 다짐</div>
-    <h2 class="cl-h">고객의 목소리에서<br>미친 만족감의 단서를 찾겠습니다</h2>
+    <h2 class="cl-h">고객의 목소리를<br>조직의 언어로 바꾸겠습니다</h2>
     <div class="cl-grid">
       <div class="pl">
         <div class="pl-lbl">01 · VOC</div>
-        <div class="pl-main">단 한 건의 VOC도 허투루 보내지 않겠습니다</div>
-        <p class="pl-sub">매일 쏟아지는 고객의 말 속에서 혁신의 단서를 찾아 구조화하고, 제품 조직이 움직일 수 있는 데이터로 번역하겠습니다.</p>
+        <div class="pl-main">VoC를 비즈니스 언어로 번역하겠습니다</div>
+        <p class="pl-sub">고객의 말 속에서 패턴을 발견하고, 개선 과제로 구조화해 제품 조직이 실행할 수 있는 근거로 만들겠습니다.</p>
       </div>
       <div class="pl">
         <div class="pl-lbl">02 · Customer Experience Team</div>
-        <div class="pl-main">CX를 조직의 성장 엔진으로 만들겠습니다</div>
-        <p class="pl-sub">Customer Experience Team의 일원으로서 토스뱅크의 PO · 개발자 · 디자이너와 함께 고객 접점을 제품 혁신의 파이프라인으로 연결하겠습니다.</p>
+        <div class="pl-main">고객 접점을 혁신의 파이프라인으로 연결하겠습니다</div>
+        <p class="pl-sub">Customer Experience Team의 일원으로서 PO · 개발자 · 디자이너와 함께 고객 경험을 제품 성장의 근거로 만들겠습니다.</p>
       </div>
       <div class="pl">
         <div class="pl-lbl">03 · 실행</div>
-        <div class="pl-main">만들어내는 CX가 되겠습니다</div>
-        <p class="pl-sub">필요한 것은 직접 만들고 실행하며 조직의 속도를 높이겠습니다.<br>VOC 파이프라인과 가이드 사이트를 직접 구축했던 것처럼.</p>
+        <div class="pl-main">분석에서 실행까지 직접 완결하겠습니다</div>
+        <p class="pl-sub">아이디어를 데이터로 검증하고, 필요한 시스템은 직접 설계해 실행으로 연결하겠습니다. 분석에 머무르지 않는 CX가 되겠습니다.</p>
       </div>
       <div class="pl">
-        <div class="pl-lbl">04 · 파격</div>
-        <div class="pl-main">금융을 고객의 언어로 만들겠습니다</div>
-        <p class="pl-sub">금융의 복잡함을 단순하고 명확하게,<br>고객이 실제로 느끼는 경험으로 번역하는 역할을 다하겠습니다.</p>
+        <div class="pl-lbl">04 · 브랜드</div>
+        <div class="pl-main">고객이 느끼는 모든 언어를 설계하겠습니다</div>
+        <p class="pl-sub">안내문 한 줄, 알림 한 문장까지 브랜드 경험으로 만드는 라이팅 기준을 토스뱅크 안에 세우겠습니다.</p>
       </div>
     </div>
   </div>
@@ -893,6 +1019,45 @@ function runCounters(root){
     requestAnimationFrame(tick);
   });
 }
+
+// 역량 카드 — 드래그 스크롤 + 클릭 플립
+(function(){
+  const outer = document.querySelector('.comp-outer');
+  if(!outer) return;
+
+  let isDown=false, startX=0, scrollLeft=0, moved=false;
+
+  outer.addEventListener('mousedown', e=>{
+    isDown=true; moved=false;
+    startX=e.pageX; scrollLeft=outer.scrollLeft;
+  });
+  window.addEventListener('mouseup',()=>{ isDown=false; });
+  outer.addEventListener('mousemove', e=>{
+    if(!isDown) return;
+    e.preventDefault();
+    const dx = e.pageX - startX;
+    if(Math.abs(dx)>5) moved=true;
+    outer.scrollLeft = scrollLeft - dx * 1.1;
+  });
+
+  // 터치
+  outer.addEventListener('touchstart', e=>{
+    startX=e.touches[0].pageX; scrollLeft=outer.scrollLeft; moved=false;
+  },{passive:true});
+  outer.addEventListener('touchmove', e=>{
+    const dx = e.touches[0].pageX - startX;
+    if(Math.abs(dx)>5) moved=true;
+    outer.scrollLeft = scrollLeft - dx;
+  },{passive:true});
+
+  // 클릭 플립
+  document.querySelectorAll('.cc-wrap').forEach(card=>{
+    card.addEventListener('click', function(){
+      if(moved) return;
+      this.classList.toggle('flipped');
+    });
+  });
+})();
 </script>
 </body>
 </html>
